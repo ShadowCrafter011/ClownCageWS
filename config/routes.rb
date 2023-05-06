@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   root "home#index"
 
   post "/", to: "home#login"
+  get "logout", to: "home#logout", as: "logout"
 
   get "commands", to: "commands#index", as: "commands"
 
