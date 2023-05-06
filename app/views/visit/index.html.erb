@@ -19,7 +19,7 @@
             <% @visits.each do |v| %>
                 <% last_date ||= v.created_at %>
 
-                <tr class="<%= "divider" if last_date.to_date === v.created_at.to_date %>">
+                <tr class="<%= "divider" unless last_date.to_date === v.created_at.to_date %>">
                     <% time = convert_time v.created_at %>
                     <th scope="row" class="short-col">
                         <% if time.today? %>
@@ -31,6 +31,8 @@
                     <td class="short-col"><%= link_to domain(v.url), v.url %></td>
                     <td class="long-col"><%= link_to v.url, class: "d-block text-truncate" %></td>
                 </tr>
+
+                <% last_date = v.created_at %>
             <% end %>
         </tbody>
     </table>
