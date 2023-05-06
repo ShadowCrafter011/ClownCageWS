@@ -6,6 +6,10 @@ Rails.application.routes.draw do
 
   get "commands", to: "commands#index", as: "commands"
 
+  get "urls", to: "visit#index"
+
+  get "time_zone", to: "home#time_zone"
+
   scope :frames do
     get "rickroll", to: "commands#rickroll_frame"
     post "rickroll", to: "commands#rickroll"

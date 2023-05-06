@@ -1,0 +1,14 @@
+.long-col {
+    white-space: nowrap;
+    text-overflow:ellipsis;
+    overflow: hidden;
+    max-width:1px;
+}
+
+.short-col {
+    white-space: nowrap;
+}
+
+.divider {
+    border-bottom: 3px solid paleturquoise;
+}
