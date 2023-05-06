@@ -1,0 +1,10 @@
+<turbo-frame id="change_all_urls">
+    <div class="card" data-controller="<%= reset %>">
+        <h4>Alle URLs ändern</h4>
+        <%= form_with do |form| %>
+            <%= form.text_field :href, placeholder: "Link", class: "form-control" %>
+            <br>
+            <%= form.submit value: submit, class: "btn btn-primary btn-lg", "data-origin": "Links ändern", "data-reset-target": "text" %>
+        <% end %>
+    </div>
+</turbo-frame>

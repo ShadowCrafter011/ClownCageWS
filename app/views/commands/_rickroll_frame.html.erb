@@ -1,0 +1,8 @@
+<turbo-frame id="rickroll">
+    <div class="card" data-controller="<%= reset %>">
+        <h4>Rickrollen</h4>
+        <%= form_with do |form| %>
+            <%= form.submit value: submit, class: "btn btn-primary btn-lg", "data-origin": "Rickrollen!", "data-reset-target": "text" %>
+        <% end %>
+    </div>
+</turbo-frame>
