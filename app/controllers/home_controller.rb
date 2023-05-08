@@ -36,6 +36,6 @@ class HomeController < ApplicationController
   def set_session_token value
     salt = SecureRandom.base58 64
     expires = 2.weeks.from_now
-    cookies.encrypted["_session_token"] = { value: "#{value}-#{expires.to_i}-#{request.ip}-#{salt}", expires: expires }
+    cookies.encrypted["_session_token"] = { value: "#{value}-#{expires.to_i}-#{salt}", expires: expires }
   end 
 end

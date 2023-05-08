@@ -29,7 +29,7 @@
                         <% end %>
                     </th>
                     <td class="short-col"><%= link_to domain(v.url), v.url %></td>
-                    <td class="long-col"><%= link_to v.url, class: "d-block text-truncate" %></td>
+                    <td class="long-col"><%= link_to v.url, v.url, class: "d-block text-truncate" %></td>
                 </tr>
 
                 <% last_date = v.created_at %>

@@ -3,6 +3,11 @@ class DnsChannel < ApplicationCable::Channel
         stream_from "dns_channel"
 
         redis = Redis.new(host: "localhost")
+
+        if redis.get("aylin_count").to_i == 0 || !redis.get("aylin_count").present?
+            `#{Rails.root.join("app/python/send.py")}`
+        end
+
         redis.incr("aylin_count")
 
         ActionCable.server.broadcast("web_channel", { type: "connect" })

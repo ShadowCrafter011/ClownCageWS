@@ -29,7 +29,7 @@ class ApplicationController < ActionController::Base
     def session_token_status
         return nil unless cookies.encrypted["_session_token"].present?
         data = cookies.encrypted["_session_token"].split("-")
-        if data[1].to_i < Time.now.to_i || data[2] != request.ip
+        if data[1].to_i < Time.now.to_i
             cookies.delete :_session_token
             return nil
         end
