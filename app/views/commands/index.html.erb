@@ -1,9 +1,6 @@
 <div class="text-center my-4" data-controller="clown">
     <% if @count > 0 %>
         <h1 data-clown-target="title">Der Clown ist online!</h1>
-        <% if Visit.last.present? %>
-            <h3 id="current-url" data-clown-target="urlContainer">Momentane URL: <span data-clown-target="url"><%= Visit.last.url %></span></h3>
-        <% end %>
     <% else %>
         <h1 data-clown-target="title">Der Clown ist nicht online</h1>
     <% end %>
