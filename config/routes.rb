@@ -8,4 +8,8 @@ Rails.application.routes.draw do
 
   get "consumers", to: "consumer#index", as: "consumers"
   get "consumer/:uuid", to: "consumer#show", as: "consumer"
+
+  scope :frame do
+    get "consumer/:uuid", to: "consumer#frame", as: "consumer_frame"
+  end
 end

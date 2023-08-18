@@ -1,0 +1,27 @@
+<% if Consumer.count > 0 %>
+    <nav class="navbar">
+        <div class="container-fluid">
+            <div class="d-flex justify-content-center w-100">
+                <div id="consumer-selection" class="dropdown">
+                    <div class="d-block text-truncate" type="button" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <%= render partial: "consumer", locals: { consumer: @consumer } %>
+
+                            <%= image_tag "dropdown_icon", height: "20px" %>
+                        </div>
+                    </div>
+
+                    <ul class="dropdown-menu w-100">
+                        <% @consumers.each do |con| %>
+                            <li>
+                                <%= link_to consumer_path(con), class: "d-block" do %>
+                                    <%= render partial: "consumer", locals: { consumer: con } %>
+                                <% end %>
+                            </li>
+                        <% end %>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+<% end %>

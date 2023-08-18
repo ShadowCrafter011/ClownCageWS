@@ -1,0 +1,30 @@
+nav {
+    background-color: #D5BDAF;
+
+    #consumer-selection {
+        width: 100%;
+        max-width: 650px;
+
+        // Border and background
+        padding: 5px 10px;
+        border: 1px solid #F5EBE0;
+        border-radius: 5px;
+        background-color: #E3D5CA;
+
+        h3 {
+            margin: 0;
+        }
+        h6 {
+            max-width: 300px;
+        }
+        a {
+            color: black;
+            text-decoration: none;
+
+            padding: 5px 10px;
+        }
+        a:hover {
+            color: black;
+        }
+    }
+}

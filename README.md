@@ -1,24 +1,9 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+(Color palette)[https://coolors.co/palette/edede9-d6ccc2-f5ebe0-e3d5ca-d5bdaf]
 
-Things you may want to cover:
+# TODO
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- Fix consumer channel using "room" like web channel
+- Reload all consumer periodically
+- New id if it didn't exist

@@ -1,0 +1,13 @@
+<turbo-frame id="consumer_<%= @consumer.uuid %>">
+    <div class="d-flex align-items-center justify-content-start">
+        <h3><%= @consumer.nickname.present? ? @consumer.nickname : @consumer.uuid %></h3>
+        <%= image_tag (@consumer.online? ? "online" : "offline"), height: "40px" %>
+    </div>
+
+    <% if @consumer.online? %>
+        <h6 class="d-flex align-items-center justify-content-between">
+            <span><%= @consumer.num_tabs %> controllable <%= @consumer.num_tabs == 1 ? "tab" : "tabs" %></span>
+            <span><%= @consumer.has_active ? "One visible tab" : "No visible tab" %></span>
+        </h6>
+    <% end %>
+</turbo-frame>

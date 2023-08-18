@@ -12,9 +12,11 @@ class Consumer < ApplicationRecord
     def self.ping data
         consumer = Consumer.find(data["uuid"])
         consumer.update num_tabs: data["num_tabs"], has_active: data["has_active"]
+
+        ActionCable.server.broadcast("web_consumer_#{consumer.uuid}", { action: "reload_consumer_frame" })
     end
 
-    def last_ping
-        self.updated_at
+    def online?
+        self.updated_at + 4.seconds > Time.now
     end
 end

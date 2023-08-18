@@ -6,6 +6,11 @@ class ConsumerController < ApplicationController
     end
 
     def show
-        
+        @consumer = Consumer.find(params[:uuid])
+        @consumers = Consumer.order(created_at: :desc).filter {|con| con != @consumer}
+    end
+
+    def frame
+        @consumer = Consumer.find(params[:uuid])
     end
 end
