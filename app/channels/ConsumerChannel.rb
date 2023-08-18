@@ -4,13 +4,7 @@ class ConsumerChannel < ApplicationCable::Channel
     end
 
     def ping data
-        consumer = Consumer.find data["uuid"]
-        
-        if data["active"]
-            consumer.update last_ping: Time.now, last_active_ping: Time.now
-        else
-            consumer.update last_ping: Time.now
-        end
+        Consumer::ping data
     end
 
     def identify data

@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   def index
-    redirect_to commands_path if logged_in?
+    redirect_to consumers_path if logged_in?
   end
 
   def time_zone
@@ -23,7 +23,7 @@ class HomeController < ApplicationController
       return redirect_to root_path
     end
 
-    return redirect_to commands_path if logged_in?
+    return redirect_to consumers_path if logged_in?
     redirect_to root_path
   end
 
