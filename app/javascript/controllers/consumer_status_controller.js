@@ -10,10 +10,18 @@ export default class extends Controller {
       received: this.reload_turbo_frame,
       stimulus: this
     });
+
+    // Always reload frames every 10 seconds
+    var self = this;
+    this.reload_interval = setInterval(function() {
+      // TODO: Uncomment this, removed to unclog rails logs
+      // self.element.reload();
+    }, 10000);
   }
 
   disconnect() {
     this.subscription.unsubscribe();
+    clearTimeout(this.reload_interval);
   }
 
   reload_turbo_frame(data) {

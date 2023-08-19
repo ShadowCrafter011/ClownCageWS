@@ -4,6 +4,5 @@
 
 # TODO
 
-- Fix consumer channel using "room" like web channel
-- Reload all consumer periodically
+- Reload all consumer periodically DONE
 - New id if it didn't exist

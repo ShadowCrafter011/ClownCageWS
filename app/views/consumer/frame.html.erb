@@ -9,5 +9,7 @@
             <span><%= @consumer.num_tabs %> controllable <%= @consumer.num_tabs == 1 ? "tab" : "tabs" %></span>
             <span><%= @consumer.has_active ? "One visible tab" : "No visible tab" %></span>
         </h6>
+    <% else %>
+        <h6>Last online <%= distance_of_time_in_words(Time.now - @consumer.last_ping) %> ago</h6>    
     <% end %>
 </turbo-frame>

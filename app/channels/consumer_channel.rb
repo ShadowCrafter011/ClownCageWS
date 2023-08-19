@@ -4,11 +4,16 @@ class ConsumerChannel < ApplicationCable::Channel
     end
 
     def ping data
-        Consumer::ping data
+        Consumer::ping "non_consumer_#{uuid}", data
     end
 
     def identify data
-        stream_from "consumer_#{data["uuid"]}"
+        if Consumer.exists?(data["uuid"])
+            stream_from "consumer_#{data["uuid"]}"
+        else
+            new_consumer = Consumer.create
+            ActionCable.server.broadcast "non_consumer_#{uuid}", { type: "change_uuid", uuid: new_consumer.uuid }
+        end
     end
 
     def create_consumer

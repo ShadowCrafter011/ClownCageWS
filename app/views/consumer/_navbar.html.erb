@@ -3,23 +3,25 @@
         <div class="container-fluid">
             <div class="d-flex justify-content-center w-100">
                 <div id="consumer-selection" class="dropdown">
-                    <div class="d-block text-truncate" type="button" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <div class="d-block text-truncate" <%= "type=\"button\" role=\"button\" data-bs-toggle=\"dropdown\"".html_safe if @consumers.length > 0 %> aria-expanded="false">
                         <div class="d-flex align-items-center justify-content-between">
                             <%= render partial: "consumer", locals: { consumer: @consumer } %>
 
-                            <%= image_tag "dropdown_icon", height: "20px" %>
+                            <%= image_tag "dropdown_icon", height: "20px" if @consumers.length > 0 %>
                         </div>
                     </div>
 
-                    <ul class="dropdown-menu w-100">
-                        <% @consumers.each do |con| %>
-                            <li>
-                                <%= link_to consumer_path(con), class: "d-block" do %>
-                                    <%= render partial: "consumer", locals: { consumer: con } %>
-                                <% end %>
-                            </li>
-                        <% end %>
-                    </ul>
+                    <% if @consumers.length > 0 %>
+                        <ul class="dropdown-menu w-100">
+                            <% @consumers.each do |con| %>
+                                <li>
+                                    <%= link_to consumer_path(con), class: "d-block" do %>
+                                        <%= render partial: "consumer", locals: { consumer: con } %>
+                                    <% end %>
+                                </li>
+                            <% end %>
+                        </ul>
+                    <% end %>
                 </div>
             </div>
         </div>
