@@ -10,7 +10,10 @@ nav {
         border: 1px solid #F5EBE0;
         border-radius: 5px;
         background-color: #E3D5CA;
-
+        
+        .consumer-name {
+            min-width: 400px;
+        }
         h3 {
             margin: 0;
         }

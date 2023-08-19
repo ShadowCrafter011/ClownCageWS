@@ -17,6 +17,11 @@ class ApplicationController < ActionController::Base
         end
     end
 
+    def is_admin?
+        session_token_status == "admin"
+    end
+    helper_method :is_admin?
+
     def require_login!
         redirect_to root_path unless logged_in?
     end

@@ -1,1 +1,26 @@
 <%= render partial: "navbar" %>
+
+<div class="container">
+    <div class="d-flex justify-content-center w-100">
+        <div style="width: 100%; max-width: 800px">
+            <div class="d-flex justify-content-center gap-3 mt-3">
+                <div style="width: 80%">
+                    <%= form_with model: @consumer, class: "form" do |form| %>
+                        <div class="d-flex gap-3">
+                            <%= form.text_field :nickname, placeholder: "Nickname", class: "form-control" %>
+                            <%= form.submit value: "Save", class: "btn btn-success", style: "width: 100px" %>
+                        </div>
+                    <% end %>
+                </div>
+                <% if is_admin? %>
+                    <%= link_to "Lock", consumer_lock_path, class: "btn btn-secondary", style: "width: 100px", data: {
+                        turbo_method: :post
+                    } %>
+                    <%= link_to "Delete", consumer_delete_path, class: "btn btn-danger", style: "width: 100px", data: {
+                        turbo_method: :delete
+                    } %>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</div>

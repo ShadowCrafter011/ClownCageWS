@@ -1,6 +1,7 @@
 <turbo-frame id="consumer_<%= @consumer.uuid %>">
-    <div class="d-flex align-items-center justify-content-start">
+    <div class="d-flex align-items-center justify-content-start consumer-name">
         <h3><%= @consumer.nickname.present? ? @consumer.nickname : @consumer.uuid %></h3>
+        <%= image_tag("locked", height: "30px") if @consumer.locked %>
         <%= image_tag (@consumer.online? ? "online" : "offline"), height: "40px" %>
     </div>
 

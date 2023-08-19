@@ -5,9 +5,7 @@ class Consumer < ApplicationRecord
         self.uuid ||= SecureRandom.uuid
     end
 
-    before_save do
-        self.updated_at = Time.now
-    end
+    before_create { self.last_ping = Time.now }
 
     def self.ping change_uuid_channel, data
         unless Consumer.exists?(data["uuid"])
@@ -17,16 +15,12 @@ class Consumer < ApplicationRecord
             consumer = Consumer.find(data["uuid"])
         end
 
-        consumer.update num_tabs: data["num_tabs"], has_active: data["has_active"]
+        consumer.update num_tabs: data["num_tabs"], has_active: data["has_active"], last_ping: Time.now
 
         ActionCable.server.broadcast("web_consumer_#{consumer.uuid}", { action: "reload_consumer_frame" })
     end
 
-    def last_ping
-        self.updated_at
-    end
-
     def online?
-        self.updated_at + 4.seconds > Time.now
+        self.last_ping + 4.seconds > Time.now
     end
 end

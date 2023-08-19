@@ -7,7 +7,12 @@ Rails.application.routes.draw do
   get "time_zone", to: "home#time_zone"
 
   get "consumers", to: "consumer#index", as: "consumers"
-  get "consumer/:uuid", to: "consumer#show", as: "consumer"
+  scope "consumer/:uuid" do
+    get "/", to: "consumer#show", as: "consumer"
+    patch "/", to: "consumer#update"
+    post "lock", to: "consumer#lock", as: "consumer_lock"
+    delete "delete", to: "consumer#delete", as: "consumer_delete"
+  end
 
   scope :frame do
     get "consumer/:uuid", to: "consumer#frame", as: "consumer_frame"
