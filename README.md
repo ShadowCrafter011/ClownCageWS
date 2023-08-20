@@ -5,4 +5,12 @@
 # TODO
 
 - Reload all consumer periodically DONE
-- New id if it didn't exist
+- New id if it didn't exist DONE
+
+# Road
+
+- Consumers don't need to possess actions anymore
+- Create action dispatcher
+- Create default actions
+- Action creator (plugins and dispatched)
+- Action editor

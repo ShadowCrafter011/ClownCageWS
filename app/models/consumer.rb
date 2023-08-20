@@ -1,6 +1,8 @@
 class Consumer < ApplicationRecord
     self.primary_key = :uuid
 
+    has_many :urls
+
     before_validation do 
         self.uuid ||= SecureRandom.uuid
     end
