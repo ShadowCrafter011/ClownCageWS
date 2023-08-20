@@ -25,7 +25,21 @@
                 </div>
             </div>
         <% end %>
+    </div>
 
+    <div id="plugins" class="mt-3 text-center">
+        <h1 data-controller="tippy" data-tippy-content="Automatic actions that can be enabled/disabled">Plugins</h1>
+        <% for y in 0..(@plugins.length / 4.0).round do %>
+            <div class="row">
+                <% for x in 0..3 do %>
+                    <% break if y * 4 + x > @plugins.length - 1 %>
+                    <% plugin = @plugins[y * 4 + x] %>
 
+                    <div class="col-md-3">
+                        <%= turbo_frame_tag "action-#{plugin.id}", src: action_frame_path(@consumer, plugin) %>
+                    </div>
+                <% end %>
+            </div>
+        <% end %>
     </div>
 </div>

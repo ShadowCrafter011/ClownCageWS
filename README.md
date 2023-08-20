@@ -9,8 +9,8 @@
 
 # Road
 
-- Consumers don't need to possess actions anymore
-- Create action dispatcher
+- Consumers don't need to possess actions anymore DONE
+- Create action dispatcher DONE
 - Create default actions
 - Action creator (plugins and dispatched)
 - Action editor

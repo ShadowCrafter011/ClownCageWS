@@ -1,6 +1,7 @@
 class ConsumerController < ApplicationController
     before_action :require_login!
     before_action :require_admin!, only: [:update, :lock, :delete]
+    layout false, only: :frame
 
     def index
         if Consumer.count > 0
@@ -15,6 +16,9 @@ class ConsumerController < ApplicationController
 
         @consumer = Consumer.find(params[:uuid])
         @consumers = Consumer.order(created_at: :desc).filter {|con| con != @consumer}
+
+        @plugins = Action::plugins
+        @dispatched = Action::dispatched
     end
 
     def frame
