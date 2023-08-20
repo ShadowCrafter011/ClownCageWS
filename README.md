@@ -2,6 +2,11 @@
 
 (Color palette)[https://coolors.co/palette/edede9-d6ccc2-f5ebe0-e3d5ca-d5bdaf]
 
+# Links
+
+[Nested Rails forms](https://stackoverflow.com/a/71715794/15174310)
+[Turbo reloading forms](https://stackoverflow.com/a/71762032/15174310)
+
 # TODO
 
 - Reload all consumer periodically DONE
