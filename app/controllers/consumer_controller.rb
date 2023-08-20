@@ -1,6 +1,6 @@
 class ConsumerController < ApplicationController
     before_action :require_login!
-    before_action :require_admin!, only: [:lock, :delete]
+    before_action :require_admin!, only: [:update, :lock, :delete]
 
     def index
         if Consumer.count > 0
