@@ -10,3 +10,4 @@ pin "@popperjs/core", to: "https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/di
 pin "@rails/actioncable", to: "actioncable.esm.js"
 pin_all_from "app/javascript/channels", under: "channels"
 pin "jquery", to: "https://ga.jspm.io/npm:jquery@3.6.4/dist/jquery.js"
+pin "tippy", to: "https://unpkg.com/tippy.js@6"
