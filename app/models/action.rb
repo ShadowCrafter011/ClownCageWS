@@ -1,15 +1,28 @@
 class Action < ApplicationRecord
-  has_many :action_consumers
-  has_many :consumers, through: :action_consumers
+  has_many :action_data, dependent: :destroy
+  has_many :consumers, through: :action_data
   has_many :urls
 
-  def dispatch to
-    ActionCable.server.broadcast("consumer_#{to.uuid}", {
+  def dispatch consumer_uuid
+    action_datum = ActionDatum::find_or_create_by consumer_id: consumer_uuid, action_id: self.id
+    ActionCable.server.broadcast("consumer_#{consumer_uuid}", {
       name: self.name,
       type: self.action_type,
-      on: self.on,
-      action: self.action
+      data: action_datum.data || self.default_data
     })
+  end
+
+  def enabled? consumer_uuid
+    action_datum = ActionDatum::find_or_create_by consumer_id: consumer_uuid, action_id: self.id
+    action_datum.present? && action_datum.enabled
+  end
+
+  def plugin?
+    self.action_type == "plugin"
+  end
+
+  def dispatched?
+    self.action_type == "dispatched"
   end
 
   def self.plugins

@@ -1,6 +1,10 @@
 nav {
     background-color: #D5BDAF;
 
+    .consumer-link:hover {
+        background-color: lightblue;
+    }
+
     #consumer-selection {
         width: 100%;
         max-width: 650px;

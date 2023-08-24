@@ -1,8 +1,8 @@
 class Consumer < ApplicationRecord
     self.primary_key = :uuid
 
-    has_many :action_consumers
-    has_many :actions, through: :action_consumers
+    has_many :action_data, dependent: :destroy
+    has_many :actions, through: :action_data
     has_many :urls
 
     before_validation do 

@@ -10,25 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_20_202024) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_24_074832) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "action_consumers", force: :cascade do |t|
+  create_table "action_data", force: :cascade do |t|
     t.bigint "action_id", null: false
     t.string "consumer_id", null: false
-    t.index ["action_id"], name: "index_action_consumers_on_action_id"
-    t.index ["consumer_id"], name: "index_action_consumers_on_consumer_id"
+    t.text "data"
+    t.boolean "enabled", default: false
+    t.index ["action_id"], name: "index_action_data_on_action_id"
+    t.index ["consumer_id"], name: "index_action_data_on_consumer_id"
   end
 
   create_table "actions", force: :cascade do |t|
     t.string "name"
     t.string "action_type", default: "plugin"
-    t.string "on"
-    t.text "action"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "description"
+    t.text "default_data"
     t.index ["name"], name: "index_actions_on_name", unique: true
   end
 
@@ -55,8 +56,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_20_202024) do
     t.index ["consumer_id"], name: "index_urls_on_consumer_id"
   end
 
-  add_foreign_key "action_consumers", "actions"
-  add_foreign_key "action_consumers", "consumers", primary_key: "uuid"
+  add_foreign_key "action_data", "actions"
+  add_foreign_key "action_data", "consumers", primary_key: "uuid"
   add_foreign_key "urls", "actions"
   add_foreign_key "urls", "consumers", primary_key: "uuid"
 end

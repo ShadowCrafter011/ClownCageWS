@@ -14,7 +14,7 @@
                     <% if @consumers.length > 0 %>
                         <ul class="dropdown-menu w-100">
                             <% @consumers.each do |con| %>
-                                <li>
+                                <li class="consumer-link">
                                     <%= link_to consumer_path(con), class: "d-block" do %>
                                         <%= render partial: "consumer", locals: { consumer: con } %>
                                     <% end %>

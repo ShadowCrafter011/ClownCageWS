@@ -15,6 +15,7 @@ Rails.application.routes.draw do
 
     scope "action/:action_id" do
       get "/", to: "actions#frame", as: "action_frame"
+      post "dispatch", to: "actions#dispatch_action", as: "action_dispatch"
       post "toggle", to: "actions#toggle", as: "toggle_action"
       get "edit", to: "actions#edit", as: "action_edit"
       post "edit", to: "actions#update"
