@@ -7,6 +7,7 @@ class Action < ApplicationRecord
     return unless self.dispatched?
 
     action_datum = ActionDatum::find_or_create_by consumer_id: consumer_uuid, action_id: self.id
+    return if action_datum.consumer.locked
     ActionCable.server.broadcast("consumer_#{consumer_uuid}", {
       name: self.name,
       type: self.action_type,
