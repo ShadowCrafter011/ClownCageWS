@@ -1,7 +1,7 @@
 <turbo-frame id="consumer_<%= @consumer.uuid %>">
     <div class="d-flex align-items-center justify-content-start consumer-name">
         <h3><%= @consumer.nickname.present? ? @consumer.nickname : @consumer.uuid %></h3>
-        <%= image_tag("locked", height: "30px") if @consumer.locked %>
+        <%= image_tag("locked", height: "30px", data: { controller: "tippy", tippy_content: "Client is locked and neither listens to dispatched nor plugin actions", tippy_placement: "bottom" }) if @consumer.locked %>
         <%= image_tag (@consumer.online? ? "online" : "offline"), height: "40px" %>
     </div>
 
