@@ -3,13 +3,6 @@ class HomeController < ApplicationController
     redirect_to consumers_path if logged_in?
   end
 
-  def time_zone
-    salt = SecureRandom.base58 64
-    cookies.encrypted["time_zone"] = { value: "#{params[:t]}-#{salt}", expires: 1.week.from_now }
-    return_to = url_from(params[:p]) || root_path
-    redirect_to return_to
-  end
-
   def login
     case params[:password]
     when ENV["ADMIN_PASSWORD"]

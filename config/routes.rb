@@ -4,8 +4,6 @@ Rails.application.routes.draw do
   post "/", to: "home#login"
   get "logout", to: "home#logout", as: "logout"
 
-  get "time_zone", to: "home#time_zone"
-
   get "consumers", to: "consumer#index", as: "consumers"
   scope "consumer/:uuid" do
     get "/", to: "consumer#show", as: "consumer"
