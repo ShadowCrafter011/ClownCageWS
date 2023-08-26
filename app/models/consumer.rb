@@ -30,7 +30,7 @@ class Consumer < ApplicationRecord
             consumer = Consumer.find(data["uuid"])
         end
 
-        consumer.update num_tabs: data["num_tabs"], has_active: data["has_active"], last_ping: Time.now
+        consumer.update num_tabs: data["num_tabs"], visible_tabs: data["visible_tabs"], has_active: data["has_active"], last_ping: Time.now
 
         ActionCable.server.broadcast("web_consumer_#{consumer.uuid}", { action: "reload_consumer_frame" })
     end

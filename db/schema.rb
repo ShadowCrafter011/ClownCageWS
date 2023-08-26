@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_24_074832) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_26_161824) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -30,6 +30,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_24_074832) do
     t.datetime "updated_at", null: false
     t.text "description"
     t.text "default_data"
+    t.text "documentation"
     t.index ["name"], name: "index_actions_on_name", unique: true
   end
 
@@ -42,6 +43,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_24_074832) do
     t.boolean "has_active"
     t.boolean "locked"
     t.datetime "last_ping", precision: nil
+    t.bigint "visible_tabs"
     t.index ["uuid"], name: "index_consumers_on_uuid", unique: true
   end
 
