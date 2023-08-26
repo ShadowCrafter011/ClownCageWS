@@ -7,7 +7,7 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 # Create plugin actions
-Action.create([
+plugin_hashes = [
     {
         name: "Redirect",
         action_type: "plugin",
@@ -17,16 +17,16 @@ Action.create([
             delay: 0
         }.to_json
     }
-])
+]
 
 # Create dispatched actions
-Action.create([
+dispatched_hashes = [
     {
         name: "Alert",
         action_type: "dispatched",
         description: "Send an alert, confirm or prompt notification",
         default_data: {
-            type: "alert",
+            active: true,
             alert: [
                 "This website is still in developement and some features may not be available",
                 "This website doesn't use cookies"
@@ -40,4 +40,11 @@ Action.create([
             ]
         }.to_json
     }
-])
+]
+
+combined_hahes = plugin_hashes + dispatched_hashes
+combined_hahes.each_with_index do |action_hash, index|
+    action_hash[:id] = index + 1
+end
+
+Action.create(combined_hahes)
