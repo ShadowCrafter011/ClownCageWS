@@ -1,7 +1,7 @@
 <div class="container">
     <h1 class="text-center my-4">Wilkommen!</h1>
 
-    <%= form_with url: root_path do |form| %>
+    <%= form_with url: clown_path do |form| %>
         <div class="input-group d-flex justify-content-center" style="margin-top: 5vh">
             <% placeholder = session[:error] == 1 ? "Falsches Passwort" : "Passwort eingeben" %>
             <%= form.password_field :password, placeholder: placeholder, class: "form-control #{"is-invalid" if session[:error] == 1}", style: "max-width: 500px" %>

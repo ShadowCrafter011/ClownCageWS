@@ -19,6 +19,8 @@ class ActionsController < ApplicationController
   end
 
   def edit
+    @action_datum = ActionDatum::find_or_create_by consumer_id: params[:uuid], action_id: params[:action_id]
+    @action = @action_datum.action
   end
 
   def update

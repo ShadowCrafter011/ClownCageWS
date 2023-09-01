@@ -4,14 +4,19 @@ class Action < ApplicationRecord
   has_many :urls
 
   def dispatch consumer_uuid
-    return unless self.dispatched?
-
     action_datum = ActionDatum::find_or_create_by consumer_id: consumer_uuid, action_id: self.id
     return if action_datum.consumer.locked
     ActionCable.server.broadcast("consumer_#{consumer_uuid}", {
       name: self.name,
       type: self.action_type,
-      data: JSON.parse(action_datum.data || self.default_data)
+      data: JSON.parse(action_datum.get_data)
+    })
+  end
+
+  def revoke_plugin consumer_uuid
+    ActionCable.server.broadcast("consumer_#{consumer_uuid}", {
+      name: self.name,
+      type: "revoke_plugin"
     })
   end
 

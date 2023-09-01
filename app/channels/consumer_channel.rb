@@ -8,8 +8,9 @@ class ConsumerChannel < ApplicationCable::Channel
     end
 
     def identify data
-        if Consumer.exists?(data["uuid"])
+        if (consumer = Consumer.find_by(uuid: data["uuid"])).present?
             stream_from "consumer_#{data["uuid"]}"
+            consumer.dispatch_plugins
         else
             new_consumer = Consumer.create
             ActionCable.server.broadcast "non_consumer_#{uuid}", { type: "change_uuid", uuid: new_consumer.uuid }

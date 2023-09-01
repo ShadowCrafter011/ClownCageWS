@@ -18,6 +18,13 @@ class Consumer < ApplicationRecord
         action.present?
     end
 
+    def dispatch_plugins
+        self.action_data.each do |action_data|
+            next unless action_data.action.plugin? && action_data.enabled?
+            action_data.action.dispatch self.uuid
+        end
+    end
+
     def online?
         self.last_ping + 4.seconds > Time.now
     end

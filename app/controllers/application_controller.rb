@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
     helper_method :is_admin?
 
     def require_login!
-        redirect_to root_path unless logged_in?
+        redirect_to clown_path unless logged_in?
     end
 
     def logged_in?

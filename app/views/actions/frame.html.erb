@@ -14,8 +14,8 @@
             <% if @action.plugin? %>
                 <%= link_to "Edit plugin", action_edit_path(params[:uuid], @action), class: "btn btn-primary" %>
             <% else %>
-                <%= link_to "Dispatch", action_dispatch_path(params[:uuid], @action), class: "btn btn-success", data: { turbo_method: :post } %>
-                <%= link_to "Edit action", action_edit_path(params[:uuid], @action), class: "btn btn-primary"  %>
+                <%= link_to "Dispatch", action_dispatch_path(params[:uuid], @action), class: "btn btn-success", data: { turbo_method: :post, controller: "tippy", tippy_content: "Dispatch action with consumer data or default data", tippy_placement: "bottom" } %>
+                <%= link_to "Edit action", action_edit_path(params[:uuid], @action), class: "btn btn-primary", data: { controller: "tippy", tippy_content: "Edit consumer data for the action or dispatch it with custom data", tippy_placement: "bottom" }  %>
             <% end %>
         </div>
     </div>
