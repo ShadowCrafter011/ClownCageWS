@@ -5,7 +5,7 @@ class ConsumerController < ApplicationController
 
     def index
         if Consumer.count > 0
-            redirect_to consumer_path Consumer.last
+            redirect_to consumer_path(cookies.encrypted[:consumer] || Consumer.last)
         end
     end
 
@@ -13,6 +13,8 @@ class ConsumerController < ApplicationController
         unless Consumer.exists? params[:uuid]
             return redirect_to consumers_path
         end
+
+        cookies.encrypted[:consumer] = params[:uuid]
 
         @consumer = Consumer.find(params[:uuid])
         @consumers = Consumer.order(created_at: :desc).filter {|con| con != @consumer}
