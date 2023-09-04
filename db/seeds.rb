@@ -29,15 +29,31 @@ plugin_hashes = [
         }
     },
     {
-        name: "Click cancel",
+        name: "Cancel events",
         action_type: "plugin",
-        description: "Cancel clicks at random",
+        description: "Cancels events randomly",
         documentation: """
-        *Probability*: Probability that action procs
+        Name of the event: Probability that action procs
         """,
         default_data: {
-            on: "click",
-            probability: 0.1
+            "click": 0.5,
+            "keydown": 0.5
+        }
+    },
+    {
+        name: "Randomize keypress",
+        action_type: "plugin",
+        description: "Randomizes a keypress with a certain probability",
+        documentation: """
+        *Probability*: Probability that the action procs
+        Key: Replacement
+        """,
+        default_data: {
+            probability: 1,
+            keydata: {
+                m: "n",
+                n: "m"
+            }
         }
     }
 ]
