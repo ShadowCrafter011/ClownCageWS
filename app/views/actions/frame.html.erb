@@ -1,5 +1,5 @@
 <turbo-frame id="action-<%= @action.id %>">
-    <div class="action-container p-3 mt-3" <%= "data-controller=\"tippy\" data-tippy-content=\"#{@action.description}\"".html_safe if @action.description.present? %>>
+    <div class="action-container p-3 mt-3" data-controller="tippy" data-tippy-content="<%= @action.name %>: <%= @action.description %>">
         <div class="d-flex justify-content-center align-items-center gap-3">
             <h3 class="text-truncate"><%= @action.name %></h3>
             <% if @action.plugin? %>
