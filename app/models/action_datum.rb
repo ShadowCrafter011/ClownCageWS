@@ -13,7 +13,7 @@ class ActionDatum < ApplicationRecord
   def toggle
     self.update enabled: !self.enabled
 
-    return if JSON.parse(self.get_data)[:on] == "load"
+    return if JSON.parse(self.get_data)["on"] == "load"
 
     if self.enabled?
       self.action.dispatch self.consumer.uuid
