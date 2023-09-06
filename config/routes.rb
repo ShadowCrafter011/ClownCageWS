@@ -7,6 +7,8 @@ Rails.application.routes.draw do
     post "/", to: "home#login"
     get "logout", to: "home#logout", as: "logout"
 
+    get "action_status/:callback_uuid", to: "actions#action_status"
+
     get "consumers", to: "consumer#index", as: "consumers"
     scope "consumer/:uuid" do
       get "/", to: "consumer#show", as: "consumer"
