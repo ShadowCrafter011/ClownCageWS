@@ -4,7 +4,7 @@
             <div class="d-flex justify-content-center w-100">
                 <div id="consumer-selection" class="dropdown">
                     <div class="d-block text-truncate" <%= "type=\"button\" role=\"button\" data-bs-toggle=\"dropdown\"".html_safe if @consumers.length > 0 %> aria-expanded="false">
-                        <div class="d-flex align-items-center justify-content-between">
+                        <div class="d-flex align-items-center justify-content-between no-fade">
                             <%= render partial: "consumer", locals: { consumer: @consumer } %>
 
                             <%= image_tag "dropdown_icon", height: "20px" if @consumers.length > 0 %>

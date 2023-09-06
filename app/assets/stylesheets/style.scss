@@ -1,8 +1,10 @@
 :root {
     --salbot-bg-color: #333333;
+    --salbot-dark: #222222;
     --salbot-title-color: #11b867;
     --salbot-text-color: white;
     --salbot-link-color: #a0a0a0;
+    --salbot-faded-title-color: var(--salbot-link-color);
 }
 
 @font-face {
@@ -10,10 +12,7 @@
     src: font-url("Comfortaa-Regular.ttf");
 }
 
-#salbot-page {
-    width: 100%;
-    min-height: 100vh;
-
+body {
     background-color: var(--salbot-bg-color);
     color: var(--salbot-text-color);
 
@@ -34,4 +33,12 @@
     a:hover {
         color: var(--salbot-text-color);
     }
+}
+
+.title-padding {
+    padding-top: 20px;
+}
+
+.bottom-padding {
+    padding-bottom: 20px;
 }

@@ -1,37 +1,40 @@
 nav {
-    background-color: #D5BDAF;
-
-    .consumer-link:hover {
-        background-color: lightblue;
-    }
+    background-color: var(--salbot-dark);
 
     #consumer-selection {
+        background-color: var(--salbot-bg-color);
+
         width: 100%;
         max-width: 650px;
 
         // Border and background
         padding: 5px 10px;
-        border: 1px solid #F5EBE0;
+        border: 2px solid black;
         border-radius: 5px;
-        background-color: #E3D5CA;
         
         .consumer-name {
             min-width: 600px;
         }
         h3 {
+            color: var(--salbot-faded-title-color);
+            transition: .125s;
+
             margin: 0;
+            padding: 0;
+        }
+        .no-fade h3 {
+            color: var(--salbot-title-color);
         }
         h6 {
             max-width: 400px;
         }
         a {
-            color: black;
             text-decoration: none;
 
             padding: 5px 10px;
         }
-        a:hover {
-            color: black;
+        a:hover h3 {
+            color: var(--salbot-title-color);
         }
     }
 }
