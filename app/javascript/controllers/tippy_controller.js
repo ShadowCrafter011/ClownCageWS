@@ -3,6 +3,6 @@ import { Controller } from "@hotwired/stimulus";
 // Connects to data-controller="tippy"
 export default class extends Controller {
   connect() {
-    tippy(this.element);
+    tippy(this.element, { theme: "material" });
   }
 }
