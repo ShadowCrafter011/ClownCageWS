@@ -16,7 +16,7 @@ export default class extends Controller {
     this.reload_interval = setInterval(function() {
       // TODO: Uncomment this, removed to unclog rails logs
       // self.element.reload();
-    }, 10000);
+    }, 10_000);
   }
 
   disconnect() {

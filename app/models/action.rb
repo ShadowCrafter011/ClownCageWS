@@ -6,11 +6,21 @@ class Action < ApplicationRecord
   def dispatch consumer_uuid
     action_datum = ActionDatum::find_or_create_by consumer_id: consumer_uuid, action_id: self.id
     return if action_datum.consumer.locked
-    ActionCable.server.broadcast("consumer_#{consumer_uuid}", {
+
+    data = {
       name: self.name,
       type: self.action_type,
       data: JSON.parse(action_datum.get_data)
-    })
+    }
+
+    if self.dispatched?
+      callback_uuid = SecureRandom.urlsafe_base64
+      data[:callback_uuid] = callback_uuid
+      Dispatch.create uuid: callback_uuid, name: self.name
+    end
+
+    ActionCable.server.broadcast("consumer_#{consumer_uuid}", data)
+    return callback_uuid
   end
 
   def revoke_plugin consumer_uuid
