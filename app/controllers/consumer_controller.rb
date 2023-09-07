@@ -11,7 +11,7 @@ class ConsumerController < ApplicationController
 
     def show
         unless Consumer.exists? params[:uuid]
-            return redirect_to consumers_path
+            return redirect_to consumer_path(Consumer.last)
         end
 
         cookies.encrypted[:consumer] = params[:uuid]
