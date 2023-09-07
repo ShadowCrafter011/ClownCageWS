@@ -13,7 +13,7 @@ class ActionDatum < ApplicationRecord
   def toggle
     self.update enabled: !self.enabled
 
-    return self.load_plugin?
+    return if self.load_plugin?
 
     if self.enabled?
       self.action.dispatch self.consumer.uuid
