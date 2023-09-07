@@ -13,13 +13,17 @@ class ActionDatum < ApplicationRecord
   def toggle
     self.update enabled: !self.enabled
 
-    return if JSON.parse(self.get_data)["on"] == "load"
+    return self.load_plugin?
 
     if self.enabled?
       self.action.dispatch self.consumer.uuid
     else
       self.action.revoke_plugin self.consumer.uuid
     end
+  end
+
+  def load_plugin?
+    self.action.plugin? && JSON.parse(self.get_data)["on"] == "load"
   end
 
   def self.find_or_create_by consumer_id: nil, action_id: nil

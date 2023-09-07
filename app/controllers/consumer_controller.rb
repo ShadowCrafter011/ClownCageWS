@@ -33,9 +33,8 @@ class ConsumerController < ApplicationController
     end
 
     def lock
-        consumer = Consumer.find(params[:uuid])
-        consumer.update locked: !consumer.locked
-        redirect_to consumer_path consumer
+        Consumer.find(params[:uuid]).toggle_lock
+        redirect_to consumer_path params[:uuid]
     end
 
     def delete

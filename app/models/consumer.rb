@@ -18,10 +18,29 @@ class Consumer < ApplicationRecord
         action.present?
     end
 
-    def dispatch_plugins
+    def dispatch_plugins with_load_plugins: true
         self.action_data.each do |action_data|
             next unless action_data.action.plugin? && action_data.enabled?
+            next if !with_load_plugins && action_data.load_plugin? 
             action_data.action.dispatch self.uuid
+        end
+    end
+
+    def toggle_lock
+        self.update locked: !self.locked
+        if self.locked
+            self.revoke_plugins
+        else
+            self.dispatch_plugins with_load_plugins: false
+        end
+    end
+
+    def revoke_plugins
+        active_plugin_data = ActionDatum.where(consumer_id: self.uuid, enabled: true).filter do |action_datum|
+            action_datum.action.plugin? && !action_datum.load_plugin?
+        end
+        active_plugin_data.each do |plugin_datum|
+            plugin_datum.action.revoke_plugin self.uuid
         end
     end
 
