@@ -9,6 +9,10 @@ class Consumer < ApplicationRecord
         self.uuid ||= SecureRandom.uuid
     end
 
+    after_create do
+        ActionCable.server.broadcast("web_navbar", { action: "reload_navbar" })
+    end
+
     before_create { self.last_ping = Time.now }
     
     def dispatch_action action_id

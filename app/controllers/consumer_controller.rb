@@ -17,7 +17,6 @@ class ConsumerController < ApplicationController
         cookies.encrypted[:consumer] = params[:uuid]
 
         @consumer = Consumer.find(params[:uuid])
-        @consumers = Consumer.order(created_at: :desc).filter {|con| con != @consumer}
 
         @plugins = Action::plugins
         @dispatched = Action::dispatched
@@ -26,6 +25,11 @@ class ConsumerController < ApplicationController
     def frame
         @consumer = Consumer.find(params[:uuid])
     end
+
+    def navbar
+        @consumer = Consumer.find(params[:uuid])
+        @consumers = Consumer.order(created_at: :desc).filter {|con| con != @consumer}
+    end 
 
     def update
         Consumer.find(params[:uuid]).update nickname_params

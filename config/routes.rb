@@ -17,6 +17,8 @@ Rails.application.routes.draw do
       post "lock", to: "consumer#lock", as: "consumer_lock"
       delete "delete", to: "consumer#delete", as: "consumer_delete"
 
+      get "navbar", to: "consumer#navbar", as: "navbar"
+
       scope "action/:action_id" do
         get "/", to: "actions#frame", as: "action_frame"
         post "dispatch", to: "actions#dispatch_action", as: "action_dispatch"
