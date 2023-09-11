@@ -17,11 +17,6 @@ class ConsumerChannel < ApplicationCable::Channel
         end
     end
 
-    def create_consumer
-        new_consumer = Consumer.create
-        ActionCable.server.broadcast "non_consumer_#{uuid}", { type: "uuid_payload", uuid: new_consumer.uuid }
-    end
-
     def executed_action data
         Dispatch.find(data["callback_uuid"]).execute
     end
