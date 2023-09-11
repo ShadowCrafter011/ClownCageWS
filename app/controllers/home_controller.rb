@@ -25,6 +25,10 @@ class HomeController < ApplicationController
     redirect_to clown_path
   end
 
+  def download
+    redirect_to "https://github.com/ShadowCrafter011/ClownCage/archive/refs/heads/clowncagev2.zip", allow_other_host: true
+  end
+
   private
   def set_session_token value
     salt = SecureRandom.base58 64
