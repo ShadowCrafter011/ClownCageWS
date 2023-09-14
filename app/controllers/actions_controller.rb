@@ -45,6 +45,7 @@ class ActionsController < ApplicationController
   def edit
     @action_datum = ActionDatum::find_or_create_by consumer_id: params[:uuid], action_id: params[:action_id]
     @action = @action_datum.action
+    @formatted_json = JSON.pretty_generate(JSON.parse(@action_datum.get_data), indent: "    ")
   end
 
   def update

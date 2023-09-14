@@ -1,0 +1,44 @@
+#json-editor {
+    position: relative;
+
+    font-family:Inconsolata,Monaco,Consolas,'Courier New',Courier,monospace;
+}
+
+#editing, #highlighting {
+    /* Both elements need the same text and space styling so they are directly on top of each other */
+    margin: 10px;
+    padding: 10px;
+    border: 0;
+    width: calc(100% - 32px);
+    // height: 150px;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap; /* Allows textarea to scroll horizontally */
+}
+  
+#editing, #highlighting, #highlighting * {
+    /* Also add text styles to highlighting tokens */
+    font-size: 15pt;
+    font-family: monospace;
+    line-height: 20pt;
+}
+  
+#highlighting {
+    z-index: 0;
+}
+
+/* Make textarea almost completely transparent */
+#editing {
+    z-index: 1;
+
+    color: transparent;
+    background: transparent;
+    caret-color: white; /* Or choose your favorite color */
+
+    resize: none;
+}

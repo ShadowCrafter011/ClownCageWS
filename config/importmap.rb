@@ -12,3 +12,6 @@ pin "bootstrap", to: "bootstrap.min.js", preload: true
 pin "@popperjs/core", to: "popper.js", preload: true
 pin "jquery", to: "https://ga.jspm.io/npm:jquery@3.7.0/dist/jquery.js"
 pin "@rails/ujs", to: "https://ga.jspm.io/npm:@rails/ujs@7.0.7-2/lib/assets/compiled/rails-ujs.js"
+pin "prism-core", to: "https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"
+pin "prism-json", to: "https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-json.min.js"
+pin "prism-markup", to: "https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-markup.min.js"

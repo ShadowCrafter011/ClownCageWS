@@ -4,7 +4,11 @@
         <%= @action.documentation.gsub("\n", "<br>").html_safe %>
     </div>
 
-    <pre id="json-content" class="prettyprint" data-controller="json" contenteditable spellcheck="false">
-<%= JSON.pretty_generate(JSON.parse(@action_datum.get_data), indent: "    ") %>
-    </pre>
+    <div id="json-editor" data-controller="json">
+        <textarea id="editing" data-json-target="input" data-action="json#update scroll->json#sync_scroll keydown.enter->json#new_line" spellcheck="false"></textarea>
+
+        <pre id="highlighting" data-json-target="scroll" aria-hidden="true"><code class="language-json" id="highlighting-content" data-json-target="highlight"><%= @formatted_json %></code></pre>
+
+    </div>
+
 </div>
