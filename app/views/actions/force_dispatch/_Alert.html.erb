@@ -1,0 +1,35 @@
+<hr>
+<h1 class="text-center" data-controller="tippy" data-tippy-content="Force data on action dispatch">Force dispatch</h1>
+
+<%= form_with url: action_force_dispatch_path do |form| %>
+    <div>
+        <%= form.radio_button :force_type, "alert" %>
+        <%= form.label :force_type_alert, "Alert" %>
+    </div>
+    <div>
+        <%= form.radio_button :force_type, "confirm" %>
+        <%= form.label :force_type_confirm, "Confirm" %>
+    </div>
+    <div>
+        <%= form.radio_button :force_type, "prompt" %>
+        <%= form.label :force_type_prompt, "Prompt" %>
+    </div>
+    <br>
+    <div class="d-flex justify-content-start gap-4">
+        <%= form.label :force_message, "Message" %>
+        <%= form.text_field :force_message, class: "form-control" %>
+    </div>
+
+    <hr>
+
+    <div class="d-flex justify-content-start align-items-center gap-4" data-controller="tippy" data-tippy-content="Uses selected template, overriding other fields">
+        <%= form.label :force_template, "Template" %>
+        <%= form.select :force_template, alert_selections(@action_datum.get_data), {}, { class: "form-select form-select-lg" } %>
+    </div>
+
+    <br>
+    <div class="d-flex justify-content-center">
+        <%= form.submit value: "Dispatch", class: "btn btn-success btn-lg w-50" %>
+    </div>
+<% end %>
+<hr>

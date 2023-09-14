@@ -18,6 +18,8 @@
         <%= @action.documentation.gsub("\n", "<br>").html_safe %>
     </div>
 
+    <%= render partial: "actions/force_dispatch/#{@action.name}" rescue nil %>
+
     <%= form_with url: action_edit_path do |form| %>
         <div id="json-editor" data-controller="json">
             <textarea id="editing" name="data" data-json-target="input" data-action="json#update scroll->json#sync_scroll keydown.enter->json#new_line" spellcheck="false"></textarea>
