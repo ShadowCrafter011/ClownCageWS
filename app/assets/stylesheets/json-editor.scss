@@ -1,3 +1,25 @@
+@keyframes danger {
+    from {
+        color: white;
+        background-color: var(--bs-danger)
+    }
+    to {
+        color: black;
+        background-color: lightgray
+    }
+}
+
+#reset-btn {
+  animation: none;
+}
+
+#reset-btn:hover {
+    animation-name: danger;
+    animation-duration: .35s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
 #save-btn {
     min-width: 500px;
 }
