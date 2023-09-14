@@ -10,9 +10,9 @@ export default class extends Controller {
     let input = $(this.inputTarget)
     input.val(highlight.text())
 
-    let height = input.prop("scrollHeight")
+    let height = $(this.scrollTarget).prop("scrollHeight")
     input.css("height", `${height}px`)
-    $(this.scrollTarget).css("height", `${height}px`)
+    $("#json-editor").css("height", `${height}px`)
 
     Prism.highlightElement(highlight.get(0))
   }
@@ -29,9 +29,9 @@ export default class extends Controller {
 
     highlight.text(text)
 
-    let height = input.prop("scrollHeight")
+    let height = $(this.scrollTarget).prop("scrollHeight")
     input.css("height", `${height}px`)
-    $(this.scrollTarget).css("height", `${height}px`)
+    $("#json-editor").css("height", `${height}px`)
 
     this.sync_scroll()
 
@@ -41,7 +41,6 @@ export default class extends Controller {
   sync_scroll() {
     let scroll = $(this.scrollTarget)
     let input = $(this.inputTarget)
-    scroll.scrollTop(input.scrollTop())
     scroll.scrollLeft(input.scrollLeft())
   }
 

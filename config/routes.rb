@@ -25,6 +25,7 @@ Rails.application.routes.draw do
         post "toggle", to: "actions#toggle", as: "toggle_action"
         get "edit", to: "actions#edit", as: "action_edit"
         post "edit", to: "actions#update"
+        post "reset", to: "actions#reset", as: "action_reset"
       end
     end
 

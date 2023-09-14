@@ -43,11 +43,28 @@ class ActionsController < ApplicationController
   end
 
   def edit
+    if notice == "reset"
+      @toast_title = "Data reset"
+      @toast_body = "Data for this consumer and action has been reset to default"
+    elsif notice == "save"
+      @toast_title = "Data saved"
+      @toast_body = "Data saved for this consumer and action"
+    end
+
     @action_datum = ActionDatum::find_or_create_by consumer_id: params[:uuid], action_id: params[:action_id]
     @action = @action_datum.action
     @formatted_json = JSON.pretty_generate(JSON.parse(@action_datum.get_data), indent: "    ")
   end
 
   def update
+    action_datum = ActionDatum::find_or_create_by consumer_id: params[:uuid], action_id: params[:action_id]
+    action_datum.update data: params[:data]
+    redirect_to action_edit_path, notice: "save"
+  end
+
+  def reset
+    action_datum = ActionDatum::find_or_create_by consumer_id: params[:uuid], action_id: params[:action_id]
+    action_datum.update data: nil
+    redirect_to action_edit_path, notice: "reset"
   end
 end

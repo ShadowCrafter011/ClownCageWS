@@ -1,24 +1,31 @@
+#save-btn {
+    min-width: 500px;
+}
+
 #json-editor {
     position: relative;
-
     font-family:Inconsolata,Monaco,Consolas,'Courier New',Courier,monospace;
+    margin-bottom: 50px;
 }
 
 #editing, #highlighting {
-    /* Both elements need the same text and space styling so they are directly on top of each other */
-    margin: 10px;
-    padding: 10px;
-    border: 0;
-    width: calc(100% - 32px);
-    // height: 150px;
-
     position: absolute;
     top: 0;
     left: 0;
 
+    /* Both elements need the same text and space styling so they are directly on top of each other */
+    margin: 10px;
+    padding: 10px;
+    border: 0;
+    width: calc(100% - 20px);
+    height: auto;
+
     overflow-x: auto;
     overflow-y: hidden;
     white-space: nowrap; /* Allows textarea to scroll horizontally */
+
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
   
 #editing, #highlighting, #highlighting * {
@@ -41,4 +48,12 @@
     caret-color: white; /* Or choose your favorite color */
 
     resize: none;
+}
+
+#editing::-webkit-scrollbar {
+    display: none;
+}
+
+#highlighting::-webkit-scrollbar {
+    display: none;
 }
