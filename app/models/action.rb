@@ -30,6 +30,11 @@ class Action < ApplicationRecord
     })
   end
 
+  def redispatch consumer_uuid
+    self.revoke_plugin consumer_uuid
+    self.dispatch consumer_uuid
+  end
+
   def enabled? consumer_uuid
     action_datum = ActionDatum::find_or_create_by consumer_id: consumer_uuid, action_id: self.id
     action_datum.present? && action_datum.enabled
