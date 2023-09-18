@@ -12,6 +12,23 @@ class ActionsController < ApplicationController
     end
   end
 
+  def force_dispatch
+    force_data = {}
+    params.each_key do |key|
+      if key.starts_with? "force_"
+        force_data[key.to_s.sub("force_", "").to_sym] = params[key]
+      end
+    end
+
+    callback_uuid = Action.find(params[:action_id]).dispatch(params[:uuid], force_data)
+
+    if callback_uuid.present?
+      redirect_to action_edit_path(state: "dispatched", callback_uuid: callback_uuid)
+    else
+      redirect_to action_edit_path
+    end
+  end
+
   def action_status
     dispatch = Dispatch.find(params[:callback_uuid])
     render json: { success: true, name: dispatch.name, executed: dispatch.executed, error: dispatch.error }

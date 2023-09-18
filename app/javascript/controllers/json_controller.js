@@ -45,5 +45,9 @@ export default class extends Controller {
   }
 
   new_line() {
+    let input = $(this.inputTarget)
+    // TODO
+
+    this.update()
   }
 }

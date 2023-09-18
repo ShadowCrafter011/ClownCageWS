@@ -3,7 +3,7 @@
 
 <%= form_with url: action_force_dispatch_path do |form| %>
     <div>
-        <%= form.radio_button :force_type, "alert" %>
+        <%= form.radio_button :force_type, "alert", checked: true %>
         <%= form.label :force_type_alert, "Alert" %>
     </div>
     <div>
@@ -15,9 +15,9 @@
         <%= form.label :force_type_prompt, "Prompt" %>
     </div>
     <br>
-    <div class="d-flex justify-content-start gap-4">
+    <div class="d-flex justify-content-start align-items-center gap-4">
         <%= form.label :force_message, "Message" %>
-        <%= form.text_field :force_message, class: "form-control" %>
+        <%= form.text_field :force_message, class: "form-control form-control-lg" %>
     </div>
 
     <hr>
