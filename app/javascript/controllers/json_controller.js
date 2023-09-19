@@ -63,7 +63,8 @@ export default class extends Controller {
       }
     }
 
-    if (current_row_char_array[current_row_char_array.length - 1] == "{") {
+    let last_char = current_row_char_array[current_row_char_array.length - 1]
+    if (last_char == "{" || last_char == "[") {
       indentation += 4
     }
 
