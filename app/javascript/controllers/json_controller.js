@@ -44,10 +44,51 @@ export default class extends Controller {
     scroll.scrollLeft(input.scrollLeft())
   }
 
-  new_line() {
+  new_line(event) {
+    event.preventDefault()
+
     let input = $(this.inputTarget)
-    // TODO
+
+    let value = input.val()
+    let rows = value.substr(0, input.get(0).selectionStart).split("\n")
+    let current_row = rows[rows.length - 1]
+    let current_row_char_array = current_row.split("")
+    
+    let indentation = 0
+    for (let char of current_row_char_array) {
+      if (char == " ") {
+        indentation++
+      } else {
+        break
+      }
+    }
+
+    if (current_row_char_array[current_row_char_array.length - 1] == "{") {
+      indentation += 4
+    }
+
+    this.insert_into_value(input, "\n" + " ".repeat(indentation))
 
     this.update()
+  }
+
+  tab(event) {
+    event.preventDefault()
+    this.insert_into_value($(this.inputTarget), "    ")
+  }
+
+  insert_into_value(element, text) {
+    let value_array = element.val().split("");
+
+    let new_start = element.get(0).selectionStart + text.length;
+    
+    element.val([
+        ...value_array.slice(0, element.get(0).selectionStart),
+        text,
+        ...value_array.slice(element.get(0).selectionEnd)
+    ].join(""))
+
+    element.get(0).selectionStart = new_start
+    element.get(0).selectionEnd = new_start
   }
 }
