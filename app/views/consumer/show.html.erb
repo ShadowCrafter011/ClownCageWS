@@ -1,7 +1,7 @@
 <%= render partial: "new_consumer_toast" %>
 <%= render partial: "error_toast" %>
 
-<turbo-frame id="navbar" src="<%= navbar_path %>" data-controller="navbar"></turbo-frame>
+<turbo-frame id="navbar" src="<%= navbar_path(no_back_btn: 1) %>" data-controller="navbar"></turbo-frame>
 
 <div class="container">
     <div class="d-flex justify-content-center w-100">

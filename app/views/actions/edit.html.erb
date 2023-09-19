@@ -1,3 +1,5 @@
+<%= turbo_frame_tag "navbar", src: navbar_path %>
+
 <%= render partial: "consumer/error_toast" %>
 
 <% if notice.present? && (notice == "save" || notice == "reset") %>

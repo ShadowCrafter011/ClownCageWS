@@ -1,7 +1,13 @@
 <turbo-frame id="navbar">
     <% if Consumer.count > 0 %>
         <nav class="navbar">
-            <div class="container-fluid">
+            <div class="container-fluid position-relative">
+                <% unless params[:no_back_btn].present? %>
+                    <div class="position-absolute">
+                        <%= link_to "Back", consumer_path, class: "btn btn-success btn-lg ms-3", target: "_top" %>
+                    </div>
+                <% end %>
+
                 <div class="d-flex justify-content-center w-100">
                     <div id="consumer-selection" class="dropdown">
                         <div class="d-block text-truncate" <%= "type=\"button\" role=\"button\" data-bs-toggle=\"dropdown\"".html_safe if @consumers.length > 0 %> aria-expanded="false">
