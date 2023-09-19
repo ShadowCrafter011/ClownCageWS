@@ -1,4 +1,6 @@
-<% if notice.present? %>
+<%= render partial: "consumer/error_toast" %>
+
+<% if notice.present? && notice == "save" %>
     <div aria-live="polite" aria-atomic="true" class="position-relative rounded-3">
         <div class="toast-container p-3 top-0 end-0">
             <div class="toast bg-success" data-controller="toast">

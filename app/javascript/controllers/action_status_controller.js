@@ -10,7 +10,10 @@ export default class extends Controller {
     var successed = false
 
     this.error_timeout = setTimeout(function() {
+      console.log("error")
+      console.log(btn)
       btn.text("Error!")
+      btn.val("Error!")
       btn.addClass("btn-danger")
       btn.removeClass("btn-success")
 
@@ -18,6 +21,7 @@ export default class extends Controller {
     }, 3000)
     this.reset_timeout = setTimeout(function() {
       btn.text("Dispatch")
+      btn.val("Dispatch")
       btn.addClass("btn-success")
       btn.removeClass("btn-danger");
     }, 6000)
@@ -37,9 +41,11 @@ export default class extends Controller {
 
             setTimeout(function() {
               btn.text("Dispatch")
+              btn.val("Dispatch")
             }, 3000)
 
             btn.text("Success!")
+            btn.val("Success!")
             successed = true
           }
           if (data.error) {

@@ -29,7 +29,7 @@
 
     <br>
     <div class="d-flex justify-content-center">
-        <%= form.submit value: "Dispatch", class: "btn btn-success btn-lg w-50" %>
+        <%= form.submit value: @dispatch_button_name, class: "btn btn-success btn-lg w-50", data: @dispatch_data, "data-tippy-content": "Force dispatch action" %>
     </div>
 <% end %>
 <hr>

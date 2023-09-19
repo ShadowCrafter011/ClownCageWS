@@ -6,9 +6,9 @@ class ActionsController < ApplicationController
     callback_uuid = Action.find(params[:action_id]).dispatch(params[:uuid])
 
     if callback_uuid.present?
-      redirect_to action_frame_path(params[:uuid], params[:action_id], state: "dispatched", callback_uuid: callback_uuid)
+      redirect_to action_frame_path, notice: { state: "dispatched", callback_uuid: callback_uuid }
     else
-      redirect_to action_frame_path(params[:uuid], params[:action_id])
+      redirect_to action_frame_path
     end
   end
 
@@ -23,7 +23,7 @@ class ActionsController < ApplicationController
     callback_uuid = Action.find(params[:action_id]).dispatch(params[:uuid], force_data)
 
     if callback_uuid.present?
-      redirect_to action_edit_path(state: "dispatched", callback_uuid: callback_uuid)
+      redirect_to action_edit_path, notice: { state: "dispatched", callback_uuid: callback_uuid }
     else
       redirect_to action_edit_path
     end
@@ -38,18 +38,7 @@ class ActionsController < ApplicationController
     @action = Action.find params[:action_id]
     @enabled = @action.enabled? params[:uuid]
 
-    @dispatch_button_name = params[:state] == "dispatched" ? "Sent" : "Dispatch"
-    @dispatch_data = {
-      turbo_method: :post,
-      controller: "tippy",
-      tippy_content: "Dispatch action with consumer data or default data",
-      tippy_placement: "bottom"
-    }
-
-    if params[:state] == "dispatched"
-      @dispatch_data[:controller] = "tippy action-status"
-      @dispatch_data[:callback_uuid] = params[:callback_uuid]
-    end
+    create_dispatch_data
   end
 
   def toggle
@@ -71,6 +60,8 @@ class ActionsController < ApplicationController
     @action_datum = ActionDatum::find_or_create_by consumer_id: params[:uuid], action_id: params[:action_id]
     @action = @action_datum.action
     @formatted_json = JSON.pretty_generate(JSON.parse(@action_datum.get_data), indent: "    ")
+
+    create_dispatch_data
   end
 
   def update
@@ -83,5 +74,21 @@ class ActionsController < ApplicationController
     action_datum = ActionDatum::find_or_create_by consumer_id: params[:uuid], action_id: params[:action_id]
     action_datum.update data: nil
     redirect_to action_edit_path, notice: "reset"
+  end
+
+  private
+  def create_dispatch_data
+    @dispatch_data = {
+        turbo_method: :post,
+        controller: "tippy",
+        tippy_placement: "bottom"
+    }
+    @dispatch_button_name = "Dispatch"
+
+    if (notice.present? && notice["state"] == "dispatched")
+      @dispatch_button_name = "Sent"
+      @dispatch_data[:controller] = "tippy action-status"
+      @dispatch_data[:callback_uuid] = notice["callback_uuid"]
+    end
   end
 end
