@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_06_170555) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_20_210231) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -31,7 +31,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_06_170555) do
     t.text "description"
     t.text "default_data"
     t.text "documentation"
-    t.index ["name"], name: "index_actions_on_name", unique: true
   end
 
   create_table "consumers", id: false, force: :cascade do |t|

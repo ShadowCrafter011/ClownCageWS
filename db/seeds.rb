@@ -148,7 +148,7 @@ dispatched_hashes = [
         }
     },
     {
-        name: "Redirect D",
+        name: "Redirect",
         action_type: "dispatched",
         description: "Redirect user to specific webpage",
         documentation: """
