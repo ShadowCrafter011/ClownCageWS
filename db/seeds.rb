@@ -34,6 +34,7 @@ plugin_hashes = [
         description: "Cancels events randomly",
         documentation: """
         Name of the event: Probability that action procs
+        <a href='https://developer.mozilla.org/en-US/docs/Web/Events#event_listing' target='_blank'>mdn event list</a>
         """,
         default_data: {
             "click": 0.5,
@@ -53,6 +54,32 @@ plugin_hashes = [
             keydata: {
                 m: "n",
                 n: "m"
+            }
+        }
+    },
+    {
+        name: "Image exchange",
+        action_type: "plugin",
+        description: "Change src of random images",
+        documentation: """
+        *Probability*: Probability that the action procs
+        *Allow visible*: Forces images to be off screen for them to be swapped
+        *Interval*: Repeat every n milliseconds. Execute only once if interval is -1
+        """,
+        default_data: {
+            probability: 0.5,
+            allow_visible: false,
+            interval: 5000,
+            images: {
+                "*":[
+                    "https://media.npr.org/assets/img/2017/09/12/macaca_nigra_self-portrait-3e0070aa19a7fe36e802253048411a38f14a79f8-s1100-c50.jpg",
+                    "https://www.anwalt.de/img_cache/d3/d32ab1b554a58526c4b1b8e6e5fa376a.png",
+                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpfID3M8t7zsCyVHlA35kZRYMdIsb5Ypy8tg&usqp=CAU"
+                ],
+                "lonelyplanet.com": [
+                    "https://cdnb.artstation.com/p/assets/images/images/041/465/061/large/yh-cheng-il1708-2-chengyiharng-1605087-v3.jpg?1631775579",
+                    "https://cdnb.artstation.com/p/assets/images/images/026/435/053/large/z-k-il1708-2-wongzikuan-1705042-epicnaturefinal-refine.jpg?1588776168"
+                ]
             }
         }
     }
@@ -101,6 +128,45 @@ dispatched_hashes = [
                     }
                 }
             ]
+        }
+    },
+    {
+        name: "Change Links",
+        action_type: "dispatched",
+        description: "Change one or more links on a website",
+        documentation: """
+        """,
+        default_data: {
+            visible: true,
+            focused: true,
+            bootstrap: false,
+            links: [
+                { "*": "https://cornhub.website" },
+                { "*": "https://eelslap.com" },
+                { "pinterest": "https://portal.sbl.ch" }
+            ]
+        }
+    },
+    {
+        name: "Redirect D",
+        action_type: "dispatched",
+        description: "Redirect user to specific webpage",
+        documentation: """
+        Old URL must contain: New URL
+        """,
+        default_data: {
+            visible: true,
+            focused: true,
+            bootstrap: false,
+            links: {
+                "*": [
+                    "https://amionline.net/",
+                    "https://www.google.com/robots.txt"
+                ],
+                "portal.sbl.ch": [
+                    "https://longdogechallenge.com/"
+                ]
+            }
         }
     }
 ]

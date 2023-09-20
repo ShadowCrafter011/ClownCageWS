@@ -36,19 +36,21 @@
         <%= @action.documentation.gsub("\n", "<br>").html_safe %>
     </div>
 
-    <%= render partial: "actions/force_dispatch/#{@action.name}" rescue nil %>
+    <%= render partial: "actions/force_dispatch/#{@action.name}" %>
 
-    <%= form_with url: action_edit_path do |form| %>
-        <div id="json-editor" data-controller="json">
-            <textarea id="editing" name="data" data-json-target="input" data-action="json#update scroll->json#sync_scroll keydown.enter->json#new_line keydown.tab->json#tab keydown->json#key" spellcheck="false"></textarea>
+    <div data-controller="json">
+        <%= form_with url: action_edit_path, data: { json_target: "form" } do |form| %>
+            <div id="json-editor">
+                <textarea id="editing" name="data" data-json-target="input" data-action="json#update scroll->json#sync_scroll keydown.enter->json#new_line keydown.tab->json#tab keydown->json#key" spellcheck="false"></textarea>
 
-            <pre id="highlighting" data-json-target="scroll" aria-hidden="true"><code class="language-json" id="highlighting-content" data-json-target="highlight"><%= (notice.present? && notice["override_data"].present?) ? notice["override_data"] : @formatted_json %></code></pre>
-        </div>
+                <pre id="highlighting" data-json-target="scroll" aria-hidden="true"><code class="language-json" id="highlighting-content" data-json-target="highlight"><%= (notice.present? && notice["override_data"].present?) ? notice["override_data"] : @formatted_json %></code></pre>
+            </div>
 
-        <div class="d-flex justify-content-center mb-5 gap-3">
-            <%= link_to "Reset", action_reset_path, id: "reset-btn", class: "btn btn-danger btn-lg", data: { turbo_method: :post, turbo_confirm: "This will permanently reset changes made to this action. Are you sure?" } %>
-            <%= form.submit value: "Save", class: "btn btn-success btn-lg" %>
-        </div>
-    <% end %>
+            <div class="d-flex justify-content-center mb-5 gap-3">
+                <%= link_to "Reset", action_reset_path, id: "reset-btn", class: "btn btn-danger btn-lg", data: { turbo_method: :post, turbo_confirm: "This will permanently reset changes made to this action. Are you sure?" } %>
+                <%= form.submit value: "Save", class: "btn btn-success btn-lg" %>
+            </div>
+        <% end %>
+    </div>
 
 </div>

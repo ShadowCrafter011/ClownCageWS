@@ -38,7 +38,7 @@
                     <% break if y * 4 + x > @plugins.length - 1 %>
                     <% plugin = @plugins[y * 4 + x] %>
 
-                    <div class="col-md-3">
+                    <div class="col-lg-3">
                         <%= turbo_frame_tag "action-#{plugin.id}", src: action_frame_path(@consumer, plugin) %>
                     </div>
                 <% end %>
@@ -56,7 +56,7 @@
                     <% break if y * 4 + x > @dispatched.length - 1 %>
                     <% dispatched = @dispatched[y * 4 + x] %>
 
-                    <div class="col-md-3">
+                    <div class="col-lg-3">
                         <%= turbo_frame_tag "action-#{dispatched.id}", src: action_frame_path(@consumer, dispatched) %>
                     </div>
                 <% end %>

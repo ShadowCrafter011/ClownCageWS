@@ -1,0 +1,11 @@
+<hr>
+<h1 class="text-center" data-controller="tippy" data-tippy-content="Force data on action dispatch">Force dispatch</h1>
+
+<%= form_with url: action_force_dispatch_path do |form| %>
+    <%= yield form %>
+    <br>
+    <div class="d-flex justify-content-center">
+        <%= form.submit value: @dispatch_button_name, class: "btn btn-success btn-lg w-50", data: @dispatch_data, "data-tippy-content": "Force dispatch action" %>
+    </div>
+<% end %>
+<hr>

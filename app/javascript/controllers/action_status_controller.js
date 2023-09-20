@@ -1,6 +1,5 @@
 import { Controller } from "@hotwired/stimulus"
 import Rails from "@rails/ujs"
-import $ from "jquery"
 
 // Connects to data-controller="action-status"
 export default class extends Controller {

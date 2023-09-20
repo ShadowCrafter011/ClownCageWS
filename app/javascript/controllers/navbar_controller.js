@@ -1,6 +1,5 @@
 import { Controller } from "@hotwired/stimulus"
 import consumer from "../channels/consumer"
-import $ from "jquery"
 
 // Connects to data-controller="navbar"
 export default class extends Controller {

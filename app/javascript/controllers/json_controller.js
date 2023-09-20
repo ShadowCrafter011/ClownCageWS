@@ -1,11 +1,12 @@
 import { Controller } from "@hotwired/stimulus"
-import $ from "jquery"
 
 // Connects to data-controller="json"
 export default class extends Controller {
-  static targets = ["input", "highlight", "scroll"]
+  static targets = ["input", "highlight", "scroll", "form"]
 
   connect() {
+    $(this.formTarget).dirtyForms()
+
     let highlight = $(this.highlightTarget)
     let input = $(this.inputTarget)
     input.val(highlight.text())
