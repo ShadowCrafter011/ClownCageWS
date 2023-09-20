@@ -66,8 +66,8 @@ class ActionsController < ApplicationController
 
   def update
     action_datum = ActionDatum::find_or_create_by consumer_id: params[:uuid], action_id: params[:action_id]
-    action_datum.update data: params[:data]
-    redirect_to action_edit_path, notice: "save"
+    success = action_datum.set_data params[:data]
+    redirect_to action_edit_path, notice: success ? "save" : { message: "invalid_json", override_data: params[:data] }
   end
 
   def reset

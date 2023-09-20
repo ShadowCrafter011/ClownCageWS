@@ -12,6 +12,14 @@ class ActionDatum < ApplicationRecord
     self.data || self.action.default_data
   end
 
+  def set_data data
+    JSON.parse(data)
+    self.update data: data
+    true
+  rescue JSON::ParserError, TypeError => e
+    false
+  end
+
   def enabled?
     self.enabled
   end

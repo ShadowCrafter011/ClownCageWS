@@ -50,8 +50,7 @@ export default class extends Controller {
     let input = $(this.inputTarget)
 
     let value = input.val()
-    let rows = value.substr(0, input.get(0).selectionStart).split("\n")
-    let current_row = rows[rows.length - 1]
+    let current_row = this.get_row(value, input.get(0).selectionStart)
     let current_row_char_array = current_row.split("")
     
     let indentation = 0
@@ -76,6 +75,30 @@ export default class extends Controller {
   tab(event) {
     event.preventDefault()
     this.insert_into_value($(this.inputTarget), "    ")
+  }
+
+  key(event) {
+    if (!(event.key == "}" || event.key == "]")) return;
+    let input = $(this.inputTarget)
+    let current_row = this.get_row(input.val(), this.inputTarget.selectionStart)
+    let cached_selection_start = this.inputTarget.selectionStart
+    if (current_row.trim() == "") {
+      event.preventDefault()
+      let char_array = input.val().split("")
+      input.val([
+        ...char_array.slice(0, this.inputTarget.selectionStart - 4),
+        event.key,
+        ...char_array.slice(this.inputTarget.selectionStart)
+      ].join(""))
+    }
+    this.inputTarget.selectionStart = cached_selection_start - 3
+    this.inputTarget.selectionEnd = this.inputTarget.selectionStart
+    this.update()
+  }
+
+  get_row(text, at) {
+    let rows = text.substr(0, at).split("\n")
+    return rows[rows.length - 1]
   }
 
   insert_into_value(element, text) {

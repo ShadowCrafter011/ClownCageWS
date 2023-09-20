@@ -10,8 +10,6 @@ export default class extends Controller {
     var successed = false
 
     this.error_timeout = setTimeout(function() {
-      console.log("error")
-      console.log(btn)
       btn.text("Error!")
       btn.val("Error!")
       btn.addClass("btn-danger")
