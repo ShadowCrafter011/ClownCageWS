@@ -2,12 +2,6 @@ class ActionDatum < ApplicationRecord
   belongs_to :action
   belongs_to :consumer
 
-  after_update do
-    if self.enabled? && self.action.plugin? && !self.consumer.locked && !self.load_plugin?
-      self.action.redispatch self.consumer.uuid
-    end
-  end
-
   def get_data
     self.data || self.action.default_data
   end
@@ -15,6 +9,11 @@ class ActionDatum < ApplicationRecord
   def set_data data
     JSON.parse(data)
     self.update data: data
+
+    if self.enabled? && self.action.plugin? && !self.consumer.locked && !self.load_plugin?
+      self.action.redispatch self.consumer.uuid
+    end
+
     true
   rescue JSON::ParserError, TypeError => e
     false

@@ -45,7 +45,7 @@ class ActionsController < ApplicationController
     action_datum = ActionDatum::find_or_create_by(consumer_id: params[:uuid], action_id: params[:action_id])
     return unless action_datum.action.plugin?
     action_datum.toggle
-    redirect_to action_frame_path(params[:uuid], params[:action_id])
+    redirect_to action_frame_path
   end
 
   def edit
