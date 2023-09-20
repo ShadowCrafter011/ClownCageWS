@@ -36,7 +36,7 @@
         <%= @action.documentation.gsub("\n", "<br>").html_safe %>
     </div>
 
-    <%= render partial: "actions/force_dispatch/#{@action.name}" %>
+    <%= render partial: "actions/force_dispatch/#{@action.name}" rescue nil %>
 
     <div data-controller="json">
         <%= form_with url: action_edit_path, data: { json_target: "form" } do |form| %>
