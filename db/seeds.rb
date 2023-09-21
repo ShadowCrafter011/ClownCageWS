@@ -169,9 +169,11 @@ dispatched_hashes = [
         description: "Open a tab with a specified link",
         documentation: """
         """,
-        default_data: [
-            "https://google.com"
-        ]
+        default_data: {
+            links: [
+                "https://google.com"
+            ]
+        }
     }
 ]
 

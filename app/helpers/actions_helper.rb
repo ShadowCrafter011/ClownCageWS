@@ -16,6 +16,6 @@ module ActionsHelper
 
     def open_tab_selections data
         data = JSON.parse data
-        data.map {|url| [url, url]}
+        [["None", "0"]] + data["links"].map {|url| [url, url]}
     end
 end
