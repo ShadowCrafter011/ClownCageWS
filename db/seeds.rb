@@ -185,6 +185,16 @@ dispatched_hashes = [
             random: true,
             amount: 1
         }
+    },
+    {
+        name: "Shuffle Tabs",
+        description: "Shuffle tabs into a random order",
+        documentation: """
+        """,
+        editable: false,
+        default_data: {
+            nothing: "here"
+        }
     }
 ]
 

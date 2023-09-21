@@ -61,6 +61,8 @@ class ActionsController < ApplicationController
     @action = @action_datum.action
     @formatted_json = JSON.pretty_generate(JSON.parse(@action_datum.get_data), indent: "    ")
 
+    return redirect_to consumer_path unless @action.editable
+
     create_dispatch_data
   end
 
