@@ -10,7 +10,6 @@
 plugin_hashes = [
     {
         name: "Redirect",
-        action_type: "plugin",
         description: "Redirect the user from certain pages to certain pages on load",
         documentation: """
         *Probability*: Probability that action procs
@@ -30,7 +29,6 @@ plugin_hashes = [
     },
     {
         name: "Cancel events",
-        action_type: "plugin",
         description: "Cancels events randomly",
         documentation: """
         Name of the event: Probability that action procs
@@ -43,7 +41,6 @@ plugin_hashes = [
     },
     {
         name: "Randomize keypress",
-        action_type: "plugin",
         description: "Randomizes a keypress with a certain probability",
         documentation: """
         *Probability*: Probability that the action procs
@@ -59,17 +56,18 @@ plugin_hashes = [
     },
     {
         name: "Image exchange",
-        action_type: "plugin",
         description: "Change src of random images",
         documentation: """
         *Probability*: Probability that the action procs
         *Allow visible*: Forces images to be off screen for them to be swapped
         *Interval*: Repeat every n milliseconds. Execute only once if interval is -1
+        *Amount*: Number of images changed per interval
         """,
         default_data: {
             probability: 0.5,
             allow_visible: false,
             interval: 5000,
+            amount: 1,
             images: {
                 "*":[
                     "https://media.npr.org/assets/img/2017/09/12/macaca_nigra_self-portrait-3e0070aa19a7fe36e802253048411a38f14a79f8-s1100-c50.jpg",
@@ -89,7 +87,6 @@ plugin_hashes = [
 dispatched_hashes = [
     {
         name: "Alert",
-        action_type: "dispatched",
         description: "Send an alert, confirm or prompt notification",
         documentation: """
         *Active*: Set if the action only triggers on an active and focused tab
@@ -132,7 +129,6 @@ dispatched_hashes = [
     },
     {
         name: "Change Links",
-        action_type: "dispatched",
         description: "Change one or more links on a website",
         documentation: """
         """,
@@ -149,7 +145,6 @@ dispatched_hashes = [
     },
     {
         name: "Redirect",
-        action_type: "dispatched",
         description: "Redirect user to specific webpage",
         documentation: """
         Old URL must contain: New URL
@@ -168,8 +163,25 @@ dispatched_hashes = [
                 ]
             }
         }
+    },
+    {
+        name: "Open Tab",
+        description: "Open a tab with a specified link",
+        documentation: """
+        """,
+        default_data: [
+            "https://google.com"
+        ]
     }
 ]
+
+plugin_hashes.each do |plugin_hash|
+    plugin_hash[:action_type] = "plugin"
+end
+
+dispatched_hashes.each do |dispatch_hash|
+    dispatch_hash[:action_type] = "dispatched"
+end
 
 combined_hahes = plugin_hashes + dispatched_hashes
 combined_hahes.each_with_index do |action_hash, index|

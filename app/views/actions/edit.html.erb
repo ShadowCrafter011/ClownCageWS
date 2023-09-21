@@ -37,7 +37,7 @@
     </div>
 
     <% if @action.dispatched? %>
-        <%= render partial: "actions/force_dispatch/#{@action.name}" rescue nil %>
+        <%= render partial: "actions/force_dispatch/#{@action.name}" %>
     <% end %>
 
     <div data-controller="json">
