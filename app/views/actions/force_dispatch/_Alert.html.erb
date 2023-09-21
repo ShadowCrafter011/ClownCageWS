@@ -12,15 +12,15 @@
         <%= form.label :force_type_prompt, "Prompt" %>
     </div>
     <br>
-    <div class="d-flex justify-content-start align-items-center gap-4">
+    <div>
         <%= form.label :force_message, "Message" %>
-        <%= form.text_field :force_message, class: "form-control form-control-lg" %>
+        <%= form.text_field :force_message, class: "form-control" %>
     </div>
 
-    <hr>
+    <br>
 
-    <div class="d-flex justify-content-start align-items-center gap-4" data-controller="tippy" data-tippy-content="Uses selected template, overriding other fields">
-        <%= form.label :force_template, "Template" %>
-        <%= form.select :force_template, alert_selections(@action_datum.get_data), {}, { class: "form-select form-select-lg" } %>
+    <div>
+        <%= form.label :force_template, "Use selected template overriding other fields" %>
+        <%= form.select :force_template, alert_selections(@action_datum.get_data), {}, { class: "form-select" } %>
     </div>
 <% end %>
