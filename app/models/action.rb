@@ -19,7 +19,6 @@ class Action < ApplicationRecord
       Dispatch.create uuid: callback_uuid, name: self.name
     end
 
-    puts "TEST #{force_data}"
     data[:data][:force] = force_data unless force_data == {}
     ActionCable.server.broadcast("consumer_#{consumer_uuid}", data)
     return callback_uuid

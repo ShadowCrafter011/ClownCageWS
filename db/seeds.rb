@@ -170,9 +170,20 @@ dispatched_hashes = [
         documentation: """
         """,
         default_data: {
+            amount: 1,
             links: [
                 "https://google.com"
             ]
+        }
+    },
+    {
+        name: "Close Tab",
+        description: "Close one or more tabs",
+        documentation: """
+        """,
+        default_data: {
+            random: true,
+            amount: 1
         }
     }
 ]
