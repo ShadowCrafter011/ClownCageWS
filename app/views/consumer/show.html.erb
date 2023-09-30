@@ -1,7 +1,7 @@
 <%= render partial: "new_consumer_toast" %>
 <%= render partial: "error_toast" %>
 
-<turbo-frame id="navbar" src="<%= navbar_path(no_back_btn: 1) %>" data-controller="navbar"></turbo-frame>
+<turbo-frame id="navbar" src="<%= navbar_path(no_back_btn: 1, controller_name: controller_name, action_name: action_name) %>" data-controller="navbar"></turbo-frame>
 
 <div class="container">
     <div class="d-flex justify-content-center w-100">
@@ -31,36 +31,63 @@
     </div>
 
     <div id="plugins" class="my-4 text-center">
-        <h1 data-controller="tippy" data-tippy-content="Automatic actions that can be enabled/disabled">Plugins</h1>
-        <% for y in 0..(@plugins.length / 4.0).round do %>
-            <div class="row">
-                <% for x in 0..3 do %>
-                    <% break if y * 4 + x > @plugins.length - 1 %>
-                    <% plugin = @plugins[y * 4 + x] %>
+        <div class="collapser d-flex justify-content-center align-items-center gap-4 mb-2" data-bs-toggle="collapse" data-bs-target="#plugins-collapse">
+            <h1 class="mb-0 pb-0" data-controller="tippy" data-tippy-content="Automatic actions that can be enabled/disabled">Plugins</h1>
+            <%= image_tag "dropdown", height: "30px" %>
+        </div>
 
-                    <div class="col-lg-3">
-                        <%= turbo_frame_tag "action-#{plugin.id}", src: action_frame_path(@consumer, plugin) %>
-                    </div>
+        <div id="plugins-collapse" class="collapse show">
+            <div class="explorer-container">
+                <% @plugin_folders.each do |plugin_folder| %>
+                    <%= link_to folder_path(folder_id: plugin_folder.id), class: "explorer-item d-flex align-items-center gap-4" do %>
+                        <%= image_tag "folder.png", height: "40px" %>
+                        <h3 class="mb-0 pb-0"><%= plugin_folder.name %></h3>
+                    <% end %>
+                <% end %>
+
+                <% @plugins.each do |plugin| %>
+                    <% if plugin.editable %>
+                        <%= link_to action_edit_path(action_id: plugin.id), class: "explorer-item d-block" do %>
+                            <%= turbo_frame_tag "action-#{plugin.id}", src: action_frame_path(@consumer, plugin)  %>
+                        <% end %>
+                    <% else %>
+                        <a class="explorer-item d-block" href="#" data-controller="non-editable-error" data-action="non-editable-error#show">
+                            <%= turbo_frame_tag "action-#{plugin.id}", src: action_frame_path(@consumer, plugin) %>
+                        </a>
+                    <% end %>
                 <% end %>
             </div>
-        <% end %>
     </div>
 
     <hr>
 
     <div id="dispatched" class="my-4 text-center">
-        <h1 data-controller="tippy" data-tippy-content="Actions dispatched to the client from here">Dispatched actions</h1>
-        <% for y in 0..(@dispatched.length / 4.0).round do %>
-            <div class="row">
-                <% for x in 0..3 do %>
-                    <% break if y * 4 + x > @dispatched.length - 1 %>
-                    <% dispatched = @dispatched[y * 4 + x] %>
+        <div class="collapser d-flex justify-content-center align-items-center gap-4 mb-2" data-bs-toggle="collapse" data-bs-target="#dispatched-collapse">
+            <h1 class="mb-0 pb-0" data-controller="tippy" data-tippy-content="Actions dispatched to the client from here">Dispatched Actions</h1>
+            <%= image_tag "dropdown", height: "30px" %>
+        </div>
 
-                    <div class="col-lg-3">
-                        <%= turbo_frame_tag "action-#{dispatched.id}", src: action_frame_path(@consumer, dispatched) %>
-                    </div>
+        <div id="dispatched-collapse" class="collapse show">
+            <div class="explorer-container">
+                <% @dispatched_folders.each do |dispatched_folder| %>
+                    <%= link_to folder_path(folder_id: dispatched_folder.id), class: "explorer-item d-flex align-items-center gap-4" do %>
+                        <%= image_tag "folder.png", height: "40px" %>
+                        <h3 class="mb-0 pb-0"><%= dispatched_folder.name %></h3>
+                    <% end %>
+                <% end %>
+
+                <% @dispatched.each do |dispatched| %>
+                    <% if dispatched.editable %>
+                        <%= link_to action_edit_path(action_id: dispatched.id), class: "explorer-item d-block" do %>
+                            <%= turbo_frame_tag "action-#{dispatched.id}", src: action_frame_path(@consumer, dispatched)  %>
+                        <% end %>
+                    <% else %>
+                        <a class="explorer-item d-block" href="#" data-controller="non-editable-error" data-action="non-editable-error#show">
+                            <%= turbo_frame_tag "action-#{dispatched.id}", src: action_frame_path(@consumer, dispatched) %>
+                        </a>
+                    <% end %>
                 <% end %>
             </div>
-        <% end %>
+        </div>
     </div>
 </div>

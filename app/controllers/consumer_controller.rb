@@ -29,6 +29,16 @@ class ConsumerController < ApplicationController
     def navbar
         @consumer = Consumer.find(params[:uuid])
         @consumers = Consumer.order(created_at: :desc).filter {|con| con != @consumer}
+
+        permitted = params.permit(:uuid, :action_id, :folder_id, :controller_name, :action_name)
+        @url_params = permitted.merge(controller: permitted[:controller_name], action: permitted[:action_name])
+        @url_params = @url_params.except(:controller_name, :action_name)
+        if permitted[:action_id].present?
+            @url_params = @url_params.merge(action_id: permitted[:action_id])
+        end
+        if permitted[:folder_id].present?
+            @url_params = @url_params.merge(folder_id: permitted[:folder_id])
+        end
     end 
 
     def update

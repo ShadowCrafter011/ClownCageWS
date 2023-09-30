@@ -1,4 +1,4 @@
-<%= turbo_frame_tag "navbar", src: navbar_path %>
+<%= turbo_frame_tag "navbar", src: navbar_path(controller_name: controller_name, action_name: action_name, action_id: params[:action_id]) %>
 
 <%= render partial: "consumer/error_toast" %>
 
