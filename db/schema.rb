@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_21_193704) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_22_114721) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -32,6 +32,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_21_193704) do
     t.text "default_data"
     t.text "documentation"
     t.boolean "editable", default: true
+    t.bigint "folder_id"
   end
 
   create_table "consumers", id: false, force: :cascade do |t|
@@ -56,6 +57,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_21_193704) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "folders", force: :cascade do |t|
+    t.string "name"
+    t.string "action_type"
+    t.bigint "folder_id"
+    t.index ["folder_id"], name: "index_folders_on_folder_id"
+  end
+
   create_table "urls", force: :cascade do |t|
     t.string "url"
     t.bigint "action_id", null: false
@@ -69,6 +77,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_21_193704) do
 
   add_foreign_key "action_data", "actions"
   add_foreign_key "action_data", "consumers", primary_key: "uuid"
+  add_foreign_key "folders", "folders"
   add_foreign_key "urls", "actions"
   add_foreign_key "urls", "consumers", primary_key: "uuid"
 end

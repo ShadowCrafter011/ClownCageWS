@@ -1,0 +1,45 @@
+.explorer-container {
+    border: 2px solid black;
+    border-radius: 5px;
+}
+
+.explorer-item {
+    min-height: 60px;
+    padding: 10px;
+    border-bottom: 2px solid black;
+    text-decoration: none;
+
+    transition-duration: .25s;
+
+    cursor: pointer;
+}
+
+.explorer-item:hover {
+    background-color: var(--salbot-dark);
+}
+
+.explorer-item:last-child {
+    border-bottom: 0;
+}
+
+.collapser {
+    cursor: pointer;
+}
+
+.collapser img {
+    transform: rotate(180deg);
+    transition-duration: .25s;
+}
+
+.collapser[aria-expanded="true"] img {
+    transform: rotate(180deg);
+}
+
+.collapser[aria-expanded="false"] img {
+    transform: rotate(0deg);
+    color: yellow;
+}
+
+.error {
+    color: var(--salbot-error-color);
+}

@@ -1,1 +1,13 @@
 <%= turbo_frame_tag "navbar", src: navbar_path(controller_name: controller_name, action_name: action_name, folder_id: params[:folder_id]) %>
+
+<div class="container">
+    <div class="my-4 text-center">
+        <h1 class="mb-2"><%= @folder.name %></h1>
+
+        <div class="explorer-container">
+            <% @actions.each do |action| %>
+                <%= render partial: @folder.action_type, locals: { action: action, consumer: @consumer } %>
+            <% end %>
+        </div>
+    </div>
+</div>

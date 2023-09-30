@@ -46,15 +46,7 @@
                 <% end %>
 
                 <% @plugins.each do |plugin| %>
-                    <% if plugin.editable %>
-                        <%= link_to action_edit_path(action_id: plugin.id), class: "explorer-item d-block" do %>
-                            <%= turbo_frame_tag "action-#{plugin.id}", src: action_frame_path(@consumer, plugin)  %>
-                        <% end %>
-                    <% else %>
-                        <a class="explorer-item d-block" href="#" data-controller="non-editable-error" data-action="non-editable-error#show">
-                            <%= turbo_frame_tag "action-#{plugin.id}", src: action_frame_path(@consumer, plugin) %>
-                        </a>
-                    <% end %>
+                    <%= render partial: "plugin", locals: { action: plugin, consumer: @consumer } %>
                 <% end %>
             </div>
     </div>
@@ -77,15 +69,7 @@
                 <% end %>
 
                 <% @dispatched.each do |dispatched| %>
-                    <% if dispatched.editable %>
-                        <%= link_to action_edit_path(action_id: dispatched.id), class: "explorer-item d-block" do %>
-                            <%= turbo_frame_tag "action-#{dispatched.id}", src: action_frame_path(@consumer, dispatched)  %>
-                        <% end %>
-                    <% else %>
-                        <a class="explorer-item d-block" href="#" data-controller="non-editable-error" data-action="non-editable-error#show">
-                            <%= turbo_frame_tag "action-#{dispatched.id}", src: action_frame_path(@consumer, dispatched) %>
-                        </a>
-                    <% end %>
+                    <%= render partial: "dispatched", locals: { action: dispatched, consumer: @consumer } %>
                 <% end %>
             </div>
         </div>

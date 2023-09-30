@@ -1,0 +1,12 @@
+<turbo-frame id="action-<%= @action.id %>">
+    <div class="d-flex align-items-center gap-4" data-controller="tippy" data-tippy-content="<%= @action.name %>: <%= @action.description %>">
+        <%= image_tag "plugin", height: "40px" %>
+        <h3 class="mb-0 pb-0 text-truncate" data-non-editable-error-target="name"><%= @action.name %></h3>
+        <span class="text-truncate"><%= @action.description %></span>
+        <%= link_to toggle_action_path(params[:uuid], @action), class: "d-block ms-auto", data: { turbo_method: :post } do %>
+            <div class="form-check form-switch" style="cursor: pointer" data-controller="tippy" data-tippy-content="<%= @enabled ? "Click to disable" : "Click to enable" %>" data-tippy-placement="right">
+                <input type="checkbox" role="switch" class="form-check-input" style="cursor: pointer" <%= "checked".html_safe if @enabled %>>
+            </div>
+        <% end %>
+    </div>
+</turbo-frame>

@@ -19,6 +19,10 @@ Rails.application.routes.draw do
 
       get "navbar", to: "consumer#navbar", as: "navbar"
 
+      scope "folder/:folder_id" do
+        get "/", to: "consumer#folder", as: "folder"
+      end
+
       scope "action/:action_id" do
         get "/", to: "actions#frame", as: "action_frame"
         post "dispatch", to: "actions#dispatch_action", as: "action_dispatch"

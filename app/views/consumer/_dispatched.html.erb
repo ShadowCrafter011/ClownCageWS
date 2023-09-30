@@ -1,0 +1,9 @@
+<% if action.editable %>
+    <%= link_to action_edit_path(action_id: action.id), class: "explorer-item d-block" do %>
+        <%= turbo_frame_tag "action-#{action.id}", src: action_frame_path(consumer, action)  %>
+    <% end %>
+<% else %>
+    <a class="explorer-item d-block" href="#" data-controller="non-editable-error" data-action="non-editable-error#show">
+        <%= turbo_frame_tag "action-#{action.id}", src: action_frame_path(consumer, action) %>
+    </a>
+<% end %>

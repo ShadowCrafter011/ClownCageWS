@@ -39,6 +39,9 @@ class ActionsController < ApplicationController
     @enabled = @action.enabled? params[:uuid]
 
     create_dispatch_data
+
+    render :plugin_frame if @action.plugin?
+    render :dispatched_frame if @action.dispatched?
   end
 
   def toggle

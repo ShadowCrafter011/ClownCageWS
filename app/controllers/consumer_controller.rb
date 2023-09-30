@@ -17,9 +17,18 @@ class ConsumerController < ApplicationController
         cookies.encrypted[:consumer] = params[:uuid]
 
         @consumer = Consumer.find(params[:uuid])
+        
+        @plugin_folders = Folder.where(folder_id: nil, action_type: "plugin").order(id: :asc)
+        @dispatched_folders = Folder.where(folder_id: nil, action_type: "dispatched").order(id: :asc)
 
-        @plugins = Action::plugins
-        @dispatched = Action::dispatched
+        @plugins = Action::plugins.where(folder_id: nil)
+        @dispatched = Action::dispatched.where(folder_id: nil)
+    end
+
+    def folder
+        @folder = Folder.find(params[:folder_id])
+        @consumer = Consumer.find(params[:uuid])
+        @actions = @folder.actions
     end
 
     def frame

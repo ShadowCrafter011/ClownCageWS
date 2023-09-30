@@ -1,4 +1,6 @@
 class Action < ApplicationRecord
+  belongs_to :folder, optional: true
+
   has_many :action_data, dependent: :destroy
   has_many :consumers, through: :action_data
   has_many :urls

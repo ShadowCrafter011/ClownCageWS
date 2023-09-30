@@ -6,6 +6,17 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
+# Create folders
+folders = [
+    { name: "Tabs", action_type: "dispatched" }
+]
+
+folders.each_with_index do |folder_hash, index|
+    folder_hash[:id] = index + 1
+end
+
+Folder.create folders
+
 # Create plugin actions
 plugin_hashes = [
     {
@@ -78,6 +89,31 @@ plugin_hashes = [
                     "https://cdnb.artstation.com/p/assets/images/images/041/465/061/large/yh-cheng-il1708-2-chengyiharng-1605087-v3.jpg?1631775579",
                     "https://cdnb.artstation.com/p/assets/images/images/026/435/053/large/z-k-il1708-2-wongzikuan-1705042-epicnaturefinal-refine.jpg?1588776168"
                 ]
+            }
+        }
+    },
+    {
+        name: "Action on",
+        description: "Bind action to specific events",
+        documentation: """
+        """,
+        default_data: {
+            bootstrap: true,
+            :"keypress.enter" => {
+                probability: 0.5,
+                action: "redirect",
+                to: "https://monkeytype.com"
+            },
+            click: {
+                probability: 0.5,
+                action: "replace_body",
+                with: "<h1 class='text-center mt-5'>You clicked too fast, slow down!</h1>"
+            },
+            submit: {
+                probability: 0.5,
+                prevent_default: true,
+                action: "play_sound",
+                source: "https://salbot.ch/audio/rick.mp3"
             }
         }
     }
@@ -166,6 +202,7 @@ dispatched_hashes = [
     },
     {
         name: "Open Tab",
+        folder: "Tabs",
         description: "Open a tab with a specified link",
         documentation: """
         """,
@@ -178,6 +215,7 @@ dispatched_hashes = [
     },
     {
         name: "Close Tab",
+        folder: "Tabs",
         description: "Close one or more tabs",
         documentation: """
         """,
@@ -188,6 +226,7 @@ dispatched_hashes = [
     },
     {
         name: "Shuffle Tabs",
+        folder: "Tabs",
         description: "Shuffle tabs into a random order",
         documentation: """
         """,
@@ -208,6 +247,12 @@ end
 
 combined_hahes = plugin_hashes + dispatched_hashes
 combined_hahes.each_with_index do |action_hash, index|
+    if action_hash[:folder].present?
+        folder_id = Folder.find_by(name: action_hash[:folder]).id
+        action_hash[:folder_id] = folder_id
+        action_hash.delete(:folder)
+    end
+
     action_hash[:id] = index + 1
     action_hash[:default_data] = action_hash[:default_data].to_json
     action_doc_lines = action_hash[:documentation].strip.split("\n").map { |line| line.strip }
@@ -223,4 +268,4 @@ combined_hahes.each_with_index do |action_hash, index|
     action_hash[:documentation] = bolded_lines.join("\n")
 end
 
-Action.create(combined_hahes)
+Action.create! combined_hahes
