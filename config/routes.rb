@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get "down", to: "home#download"
 
   scope :admin do
-    get "/", to: "home#index", as: "clown"
+    get "/", to: "home#index", as: "admin"
     post "/", to: "home#login"
     get "logout", to: "home#logout", as: "logout"
 

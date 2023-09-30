@@ -1,17 +1,17 @@
 class ApplicationController < ActionController::Base    
     def require_admin!
-        unless session_token_status == "admin"
-            render file: Rails.public_path.join("404.html"), status: :not_found, layout: false
-        end
+        # TODO: Remove "public" for final release
+        redirect_to admin_path unless session_token_status == "admin" || session_token_status == "public"
     end
 
     def is_admin?
-        session_token_status == "admin"
+        # TODO: Remove "public" for final release
+        session_token_status == "admin" || session_token_status == "public"
     end
     helper_method :is_admin?
 
     def require_login!
-        redirect_to clown_path unless logged_in?
+        redirect_to admin_path unless logged_in?
     end
 
     def logged_in?
