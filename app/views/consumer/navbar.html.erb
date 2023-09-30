@@ -4,7 +4,7 @@
             <div class="container-fluid position-relative">
                 <% unless params[:no_back_btn].present? %>
                     <div class="position-absolute">
-                        <%= link_to "Back", consumer_path, class: "btn btn-success btn-lg ms-3", target: "_top" %>
+                        <%= link_to "Back", consumer_path, class: "btn btn-success btn-lg ms-3", target: "_top", data: { controller: "link", action: "link#click" } %>
                     </div>
                 <% end %>
 
