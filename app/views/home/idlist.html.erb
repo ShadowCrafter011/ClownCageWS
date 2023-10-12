@@ -1,0 +1,15 @@
+<div class="container my-4">
+    <h1 class="text-center mb-2">Plugins</h1>
+    <div class="idlist">
+        <% @plugins.each do |plugin| %>
+            <%= render partial: "action_info", locals: { action: plugin } %>
+        <% end %>
+    </div>
+
+    <h1 class="text-center mt-4">Commands</h1>
+    <div class="idlist">
+        <% @commands.each do |cmd| %>
+            <%= render partial: "action_info", locals: { action: cmd } %>
+        <% end %>
+    </div>
+</div>

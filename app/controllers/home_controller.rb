@@ -3,6 +3,11 @@ class HomeController < ApplicationController
     redirect_to consumers_path if logged_in?
   end
 
+  def idlist
+    @plugins = Action::plugins.order(id: :asc)
+    @commands = Action::dispatched.order(id: :asc)
+  end
+
   def login
     case params[:password]
     when ENV["ADMIN_PASSWORD"]
@@ -34,5 +39,5 @@ class HomeController < ApplicationController
     salt = SecureRandom.base58 64
     expires = 2.weeks.from_now
     cookies.encrypted["_session_token"] = { value: "#{value}-#{expires.to_i}-#{salt}", expires: expires }
-  end 
+  end
 end

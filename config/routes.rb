@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     get "/", to: "home#index", as: "admin"
     post "/", to: "home#login"
     get "logout", to: "home#logout", as: "logout"
+    get "idlist", to: "home#idlist", as: "idlist"
 
     get "action_status/:callback_uuid", to: "actions#action_status"
 
