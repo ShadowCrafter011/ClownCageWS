@@ -11,6 +11,8 @@ class Action < ApplicationRecord
 
     data = {
       name: self.name,
+      id: self.id,
+      context: self.context,
       type: self.action_type,
       data: JSON.parse(action_datum.get_data)
     }
@@ -29,7 +31,9 @@ class Action < ApplicationRecord
   def revoke_plugin consumer_uuid
     ActionCable.server.broadcast("consumer_#{consumer_uuid}", {
       name: self.name,
-      type: "revoke_plugin"
+      type: "revoke_plugin",
+      id: self.id,
+      context: self.context
     })
   end
 

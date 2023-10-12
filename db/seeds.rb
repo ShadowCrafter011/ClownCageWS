@@ -83,7 +83,8 @@ plugin_hashes = [
                 "*":[
                     "https://media.npr.org/assets/img/2017/09/12/macaca_nigra_self-portrait-3e0070aa19a7fe36e802253048411a38f14a79f8-s1100-c50.jpg",
                     "https://www.anwalt.de/img_cache/d3/d32ab1b554a58526c4b1b8e6e5fa376a.png",
-                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpfID3M8t7zsCyVHlA35kZRYMdIsb5Ypy8tg&usqp=CAU"
+                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpfID3M8t7zsCyVHlA35kZRYMdIsb5Ypy8tg&usqp=CAU",
+                    "https://cdn.discordapp.com/attachments/880128435148685314/1161030380405657742/dog-bum-wearing-thong-underwear-white-background-dog-bum-wearing-thong-106357113.png?ex=6536d0cd&is=65245bcd&hm=d3db7b7fec7d1023a7c76de1d29cc406d9449afc50aa47ed2c7ad64c57e9e45e&"
                 ],
                 "lonelyplanet.com": [
                     "https://cdnb.artstation.com/p/assets/images/images/041/465/061/large/yh-cheng-il1708-2-chengyiharng-1605087-v3.jpg?1631775579",
@@ -202,6 +203,7 @@ dispatched_hashes = [
     },
     {
         name: "Open Tab",
+        context: "background",
         folder: "Tabs",
         description: "Open a tab with a specified link",
         documentation: """
@@ -215,6 +217,7 @@ dispatched_hashes = [
     },
     {
         name: "Close Tab",
+        context: "background",
         folder: "Tabs",
         description: "Close one or more tabs",
         documentation: """
@@ -226,13 +229,34 @@ dispatched_hashes = [
     },
     {
         name: "Shuffle Tabs",
+        context: "background",
         folder: "Tabs",
         description: "Shuffle tabs into a random order",
-        documentation: """
-        """,
+        documentation: "",
         editable: false,
         default_data: {
             nothing: "here"
+        }
+    },
+    {
+        name: "Print",
+        description: "Show the print menu on the current page",
+        documentation: "",
+        default_data: {
+            visible: true,
+            focused: true
+        }
+    },
+    {
+        name: "Play Sound",
+        description: "Play a sound on the current webpage",
+        documentation: "",
+        default_data: {
+            visible: true,
+            focused: true,
+            sources: [
+                "https://salbot.ch/audio/rick.mp3"
+            ]
         }
     }
 ]
