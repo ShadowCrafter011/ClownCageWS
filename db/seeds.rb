@@ -261,12 +261,14 @@ dispatched_hashes = [
     }
 ]
 
-plugin_hashes.each do |plugin_hash|
+plugin_hashes.each_with_index do |plugin_hash, index|
     plugin_hash[:action_type] = "plugin"
+    plugin_hash[:id] = index + 1000
 end
 
-dispatched_hashes.each do |dispatch_hash|
+dispatched_hashes.each_with_index do |dispatch_hash, index|
     dispatch_hash[:action_type] = "dispatched"
+    dispatch_hash[:id] = index + 2000
 end
 
 combined_hahes = plugin_hashes + dispatched_hashes
@@ -277,7 +279,6 @@ combined_hahes.each_with_index do |action_hash, index|
         action_hash.delete(:folder)
     end
 
-    action_hash[:id] = index + 1
     action_hash[:default_data] = action_hash[:default_data].to_json
     action_doc_lines = action_hash[:documentation].strip.split("\n").map { |line| line.strip }
     bolded_lines = []
