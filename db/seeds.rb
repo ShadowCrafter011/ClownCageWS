@@ -173,11 +173,15 @@ dispatched_hashes = [
             visible: true,
             focused: true,
             bootstrap: false,
-            links: [
-                { "*": "https://cornhub.website" },
-                { "*": "https://eelslap.com" },
-                { "pinterest": "https://portal.sbl.ch" }
-            ]
+            links: {
+                "*": [
+                    "https://cornhub.website",
+                    "https://eelslap.com"
+                ],
+                "pinterest": [
+                    "https://portal.sbl.ch"
+                ]
+            }
         }
     },
     {
