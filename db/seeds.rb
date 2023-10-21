@@ -30,12 +30,18 @@ plugin_hashes = [
             on: "load",
             probability: 0.1,
             delay: 0,
-            urls: [
-                { "*": "https://cornhub.website" },
-                { "*": "https://eelslap.com" },
-                { "salbot.ch": "https://puginarug.com" },
-                { "pinterest": "https://google.com" }
-            ]
+            urls: {
+                "*": [
+                    "https://cornhub.website",
+                    "https://eelslap.com"
+                ],
+                "salbot.ch": [
+                    "https://puginarug.com"
+                ],
+                "pinterest": [
+                    "https://google.com"
+                ]
+            }
         }
     },
     {
@@ -115,6 +121,29 @@ plugin_hashes = [
                 prevent_default: true,
                 action: "play_sound",
                 source: "https://salbot.ch/audio/rick.mp3"
+            }
+        }
+    },
+    {
+        name: "Captcha",
+        description: "Randomly captcha a website",
+        documentation: """
+        """,
+        default_data: {
+            bootstrap: true,
+            visible: true,
+            focused: true,
+            captcha_data: {
+                "*": [
+                    "monkeytype",
+                    "tiktaktoe"
+                ],
+                "pinterest": [
+                    "geoguessr"
+                ],
+                "bs.to": [
+                    "chess"
+                ]
             }
         }
     }
