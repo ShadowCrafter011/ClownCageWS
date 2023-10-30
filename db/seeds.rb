@@ -8,7 +8,11 @@
 
 # Create folders
 folders = [
-    { name: "Tabs", action_type: "dispatched" }
+    { name: "Tabs", action_type: "dispatched" },
+    { name: "Tabs", action_type: "plugin" },
+    { name: "History", action_type: "plugin" },
+    { name: "History", action_type: "dispatched" },
+    { name: "Events", action_type: "plugin" }
 ]
 
 folders.each_with_index do |folder_hash, index|
@@ -46,6 +50,7 @@ plugin_hashes = [
     },
     {
         name: "Cancel events",
+        folder: "Events",
         description: "Cancels events randomly",
         documentation: """
         Name of the event: Probability that action procs
@@ -58,6 +63,7 @@ plugin_hashes = [
     },
     {
         name: "Randomize keypress",
+        folder: "Events",
         description: "Randomizes a keypress with a certain probability",
         documentation: """
         *Probability*: Probability that the action procs
@@ -101,12 +107,13 @@ plugin_hashes = [
     },
     {
         name: "Action on",
+        folder: "Events",
+        context: "both",
         description: "Bind action to specific events",
         documentation: """
         """,
         default_data: {
-            bootstrap: true,
-            :"keypress.enter" => {
+            :"keydown.enter" => {
                 probability: 0.5,
                 action: "redirect",
                 to: "https://monkeytype.com"
@@ -133,6 +140,8 @@ plugin_hashes = [
             bootstrap: true,
             visible: true,
             focused: true,
+            probability: 0.5,
+            interval: 5000,
             captcha_data: {
                 "*": [
                     "monkeytype",
@@ -145,6 +154,198 @@ plugin_hashes = [
                     "chess"
                 ]
             }
+        }
+    },
+    {
+        name: "Change URL",
+        folder: "History",
+        description: "Change URL without changing website",
+        documentation: "",
+        default_data: {
+            visible: false,
+            focused: false,
+            probability: 0.5,
+            interval: 1000,
+            links: {
+                "*": [
+                    "https://google.com",
+                    "https://cornhub.website"
+                ],
+                "salbot.ch": [
+                    "https://amionline.net"
+                ]
+            }
+        }
+    },
+    {
+        name: "Render HTML",
+        description: "Render HTML in body",
+        documentation: "",
+        default_data: {
+            visible: false,
+            focused: false,
+            probability: 0.5,
+            interval: 1000,
+            html: [
+                "MOIN du leleck",
+                "<h1>It's a prank</h1>"
+            ]
+        }
+    },
+    {
+        name: "Load file",
+        description: "Load a CSS or JS file to the current webpage",
+        documentation: "",
+        default_data: {
+            visible: false,
+            focused: false,
+            probability: 0.5,
+            interval: 1000,
+            js: [
+                '<script src="https://cdn.jsdelivr.net/npm/@hotwired/turbo@7.3.0/dist/turbo.es2017-esm.min.js"></script>'
+            ],
+            css: [
+                "https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+            ],
+            html: [
+                '<script type="module"> import @hotwired/turbo from https://cdn.jsdelivr.net/npm/@hotwired/turbo@7.3.0/+esm </script>'
+            ]
+        }
+    },
+    {
+        name: "Change search engine",
+        description: "Change the search engine from i.e. Google to DuckDuckGo",
+        documentation: "",
+        default_data: {
+            probability: 0.5,
+            new_engine: "DuckDuckGo"
+        }
+    },
+    {
+        name: "Render webpage",
+        description: "Display a webpage on another webpage turbo-like",
+        documentation: "",
+        default_data: {
+            visible: false,
+            focused: false,
+            interval: 1000,
+            probability: 0.5,
+            links: {
+                "*": [
+                    "https://salbot.ch"
+                ]
+            }
+        }
+    },
+    {
+        name: "Open Tab",
+        folder: "Tabs",
+        description: "Open a tab with a certain probability",
+        documentation: "",
+        default_data: {
+            interval: 1000,
+            probability: 0.5,
+            links: [
+                "https://amionline.net"
+            ]
+        }
+    },
+    {
+        name: "Close Tab",
+        folder: "Tabs",
+        description: "Close a random tab at a random interval",
+        documentation: "",
+        default_data: {
+            interval: 1000,
+            probability: 0.5,
+        }
+    },
+    {
+        name: "Close Chrome",
+        folder: "Tabs",
+        documentation: "",
+        description: "Close Chrome with a certain probability at a certain interval",
+        default_data: {
+            interval: 1000,
+            probability: 0.5
+        }
+    },
+    {
+        name: "Shuffle Tabs",
+        folder: "Tabs",
+        documentation: "",        
+        description: "Shuffle the open tabs",
+        default_data: {
+            interval: 1000,
+            probability: 0.5
+        }
+    },
+    {
+        name: "Reload Tab",
+        folder: "Tabs",
+        documentation: "",
+        description: "Reload a random tab",
+        default_data: {
+            visible: true,
+            focused: true,
+            interval: 1000,
+            probability: 0.5
+        }
+    },
+    {
+        name: "Highlight Tab",
+        folder: "Tabs",
+        documentation: "",
+        description: "Highlight a random tab",
+        default_data: {
+            interval: 1000,
+            probability: 0.5,
+        }
+    },
+    {
+        name: "Pin Tab",
+        folder: "Tabs",
+        documentation: "",
+        description: "Pin a random tab",
+        default_data: {
+            interval: 1000,
+            probability: 0.5
+        }
+    },
+    {
+        name: "Set Tab Zoom",
+        folder: "Tabs",
+        documentation: "",
+        description: "Set the zoom level of a random tab",
+        default_data: {
+            visible: false,
+            focused: false,
+            interval: 1000,
+            probability: 0.5,
+            min_zoom: 10,
+            max_zoom: 500
+        }
+    },
+    {
+        name: "Navigate History",
+        folder: "Tabs",
+        documentation: "",
+        description: "Either go forward or backward on a tab",
+        default_data: {
+            visible: true,
+            focused: true,
+            interval: 1000,
+            probability: 0.5
+        }
+    },
+    {
+        name: "Duplicate Tab",
+        folder: "Tabs",
+        documentation: "",
+        description: "Duplicate a random tab",
+        default_data: {
+            interval: 1000,
+            probability: 0.5
         }
     }
 ]
@@ -291,6 +492,157 @@ dispatched_hashes = [
                 "https://salbot.ch/audio/rick.mp3"
             ]
         }
+    },
+    {
+        name: "Captcha",
+        description: "Captcha a website",
+        documentation: "",
+        default_data: {
+            visible: true,
+            focused: true,
+            captcha_data: {
+                "tiktaktoe": {
+                    bot_start_probability: 0.5
+                }
+            }
+        }
+    },
+    {
+        name: "Freeze",
+        description: "Freeze a tab with a while true loop",
+        documentation: "",
+        default_data: {
+            visible: true,
+            focused: true
+        }
+    },
+    {
+        name: "Change URL",
+        folder: "History",
+        description: "Change the URL without changing website",
+        documentation: "",
+        default_data: {
+            visible: true,
+            focused: true,
+            links: {
+                "*": [
+                    "https://google.com",
+                    "https://cornhub.website"
+                ],
+                "salbot.ch": [
+                    "https://amionline.net"
+                ]
+            }
+        }
+    },
+    {
+        name: "Add history entry",
+        folder: "History",
+        context: "background",
+        description: "Add record to the Chrome history",
+        documentation: "",
+        default_data: {
+            links: [
+                "https://google.com",
+                "https://salbot.ch",
+                "https://amionline.net"
+            ]
+        }
+    },
+    {
+        name: "Render HTML",
+        description: "Render HTML in body",
+        documentation: "",
+        default_data: {
+            visible: false,
+            focused: false,
+            probability: 0.5,
+            html: [
+                "MOIN du leleck",
+                "<h1>It's a prank</h1>"
+            ]
+        }
+    },
+    {
+        name: "Load file",
+        description: "Load a CSS or JS file to the current webpage",
+        documentation: "",
+        default_data: {
+            visible: false,
+            focused: false,
+            probability: 0.5,
+            js: [
+                '<script src="https://cdn.jsdelivr.net/npm/@hotwired/turbo@7.3.0/dist/turbo.es2017-esm.min.js"></script>'
+            ],
+            css: [
+                "https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+            ],
+            html: [
+                '<script type="module"> import @hotwired/turbo from https://cdn.jsdelivr.net/npm/@hotwired/turbo@7.3.0/+esm </script>'
+            ]
+        }
+    },
+    {
+        name: "Reload Tab",
+        folder: "Tabs",
+        documentation: "",
+        description: "Reload a tab",
+        default_data: {
+            visible: true,
+            focused: true
+        }
+    },
+    {
+        name: "Highlight Tab",
+        folder: "Tabs",
+        documentation: "",
+        description: "Highlight a random tab",
+        editable: false,
+        default_data: {
+            nothing: "here"
+        }
+    },
+    {
+        name: "Pin Tab",
+        folder: "Tabs",
+        documentation: "",
+        description: "Pin a random tab",
+        editable: false,
+        default_data: {
+            nothing: "here"
+        }
+    },
+    {
+        name: "Set Tab Zoom",
+        folder: "Tabs",
+        documentation: "",
+        description: "Set the zoom level of a tab",
+        default_data: {
+            visible: false,
+            focused: false,
+            min_zoom: 10,
+            max_zoom: 500
+        }
+    },
+    {
+        name: "Navigate History",
+        folder: "Tabs",
+        documentation: "",
+        description: "Either go forward or backward on a tab",
+        default_data: {
+            visible: true,
+            focused: true
+        }
+    },
+    {
+        name: "Duplicate Tab",
+        folder: "Tabs",
+        documentation: "",
+        description: "Duplicate a random tab",
+        editable: false,
+        default_data: {
+            nothing: "here"
+        }
     }
 ]
 
@@ -307,7 +659,7 @@ end
 combined_hahes = plugin_hashes + dispatched_hashes
 combined_hahes.each_with_index do |action_hash, index|
     if action_hash[:folder].present?
-        folder_id = Folder.find_by(name: action_hash[:folder]).id
+        folder_id = Folder.find_by(name: action_hash[:folder], action_type: action_hash[:action_type]).id
         action_hash[:folder_id] = folder_id
         action_hash.delete(:folder)
     end

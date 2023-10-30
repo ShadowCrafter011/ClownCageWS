@@ -15,7 +15,7 @@ class ActionDatum < ApplicationRecord
     end
 
     true
-  rescue JSON::ParserError, TypeError => e
+  rescue JSON::ParserError, TypeError => _
     false
   end
 
@@ -26,7 +26,7 @@ class ActionDatum < ApplicationRecord
   def toggle
     self.update enabled: !self.enabled
 
-    return if self.load_plugin?
+    # return if self.load_plugin?
 
     if self.enabled?
       self.action.dispatch self.consumer.uuid
