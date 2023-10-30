@@ -1,10 +1,8 @@
 <%= render "actions/force_dispatch/base" do |form| %>
     <%= render partial: "actions/force_dispatch/visibility", locals: {form: form} %>
-    
-    <br>
+
     <div>
-        <%= form.label :force_link, "URL. Don't forget https://" %>
-        <br>
-        <%= form.text_field :force_link, class: "form-control" %>
+        <%= form.label :force_label, "URL of the sound to be played" %>
+        <%= form.text_field :force_url, class: "form-control" %>
     </div>
 <% end %>

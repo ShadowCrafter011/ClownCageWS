@@ -1,0 +1,13 @@
+<%= render "actions/force_dispatch/base" do |form| %>
+    <%= render partial: "actions/force_dispatch/visibility", locals: {form: form} %>
+
+    <div>
+        <%= form.label :force_type, "Type of content to be loaded into head" %>
+        <%= form.select :force_type, [["JavaScript", "js"], ["CSS", "css"], ["HTML", "html"]], {}, { class: "form-select" } %>
+    </div>
+    <br>
+    <div>
+        <%= form.label :force_url, "URL or string of the content to be loaded" %>
+        <%= form.text_field :force_url, class: "form-control" %>
+    </div>
+<% end %>

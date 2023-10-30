@@ -193,7 +193,7 @@ plugin_hashes = [
         }
     },
     {
-        name: "Load file",
+        name: "Load File",
         description: "Load a CSS or JS file to the current webpage",
         documentation: "",
         default_data: {
@@ -564,7 +564,7 @@ dispatched_hashes = [
         }
     },
     {
-        name: "Load file",
+        name: "Load File",
         description: "Load a CSS or JS file to the current webpage",
         documentation: "",
         default_data: {
