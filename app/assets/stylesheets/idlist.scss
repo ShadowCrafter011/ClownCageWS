@@ -1,0 +1,21 @@
+.idlist {
+    border: 2px solid black;
+    border-radius: 5px;
+}
+
+.idlist div {
+    border-bottom: 2px solid black;
+}
+
+.idlist div:last-child {
+    border-bottom: 0;
+}
+
+.idlist-type {
+    color: var(--salbot-link-color);
+    transition-duration: .125s;
+}
+
+.idlist div:hover .idlist-type {
+    color: var(--salbot-text-color);
+}

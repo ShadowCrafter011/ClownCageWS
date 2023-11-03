@@ -1,0 +1,13 @@
+<%= render "actions/force_dispatch/base" do |form| %>
+    <%= render partial: "actions/force_dispatch/visibility", locals: {form: form} %>
+
+    <div>
+        <%= form.label :force_type, "Type of captcha to be displayed (tiktaktoe, geoguessr, monkeytype, chess)" %>
+        <%= form.text_field :force_dispatch, class: "form-control" %>
+    </div>
+    <br>
+    <div>
+        <%= form.label :force_bot_start_probability, "Probability that the bot begins. Only TikTakToe" %>
+        <%= form.number_field :force_bot_start_probability, { value: 50, min: 0, max: 100, class: "form-control" } %>
+    </div>
+<% end %>

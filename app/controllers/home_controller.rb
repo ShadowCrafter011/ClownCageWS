@@ -1,13 +1,11 @@
 class HomeController < ApplicationController
   def index
-    redirect_to commands_path if logged_in?
+    redirect_to consumers_path if logged_in?
   end
 
-  def time_zone
-    salt = SecureRandom.base58 64
-    cookies.encrypted["time_zone"] = { value: "#{params[:t]}-#{salt}", expires: 1.week.from_now }
-    return_to = url_from(params[:p]) || root_path
-    redirect_to return_to
+  def idlist
+    @plugins = Action::plugins.order(id: :asc)
+    @commands = Action::dispatched.order(id: :asc)
   end
 
   def login
@@ -20,16 +18,20 @@ class HomeController < ApplicationController
 
     else
       session[:error] = 1
-      return redirect_to root_path
+      return redirect_to admin_path
     end
 
-    return redirect_to commands_path if logged_in?
-    redirect_to root_path
+    return redirect_to consumers_path if logged_in?
+    redirect_to admin_path
   end
 
   def logout
     cookies.delete :_session_token
-    redirect_to root_path
+    redirect_to admin_path
+  end
+
+  def download
+    redirect_to "https://github.com/ShadowCrafter011/ClownCage/archive/refs/heads/clowncagev2.zip", allow_other_host: true
   end
 
   private
@@ -37,5 +39,5 @@ class HomeController < ApplicationController
     salt = SecureRandom.base58 64
     expires = 2.weeks.from_now
     cookies.encrypted["_session_token"] = { value: "#{value}-#{expires.to_i}-#{salt}", expires: expires }
-  end 
+  end
 end

@@ -1,0 +1,8 @@
+<turbo-frame id="action-<%= @action.id %>">
+    <div class="d-flex align-items-center gap-4" data-controller="tippy" data-tippy-content="<%= @action.name %>: <%= @action.description %>">
+        <%= image_tag "action", height: "40px" %>
+        <h3 class="mb-0 pb-0 text-truncate" data-non-editable-error-target="name"><%= @action.name %></h3>
+        <span class="text-truncate"><%= @action.description %></span>
+        <%= link_to @dispatch_button_name, action_dispatch_path(params[:uuid], @action), class: "btn btn-success d-flex justify-content-center align-items-center ms-auto", data: @dispatch_data, "data-tippy-content": "Dispatch action" %>
+    </div>
+</turbo-frame>

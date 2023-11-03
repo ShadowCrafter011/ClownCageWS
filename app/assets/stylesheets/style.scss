@@ -1,0 +1,45 @@
+:root {
+    --salbot-bg-color: #333333;
+    --salbot-dark: #222222;
+    --salbot-title-color: #11b867;
+    --salbot-error-color: rgb(202, 30, 58);
+    --salbot-text-color: white;
+    --salbot-link-color: #a0a0a0;
+    --salbot-faded-title-color: var(--salbot-link-color);
+}
+
+@font-face {
+    font-family: "salbot";
+    src: font-url("Comfortaa-Regular.ttf");
+}
+
+body {
+    background-color: var(--salbot-bg-color);
+    color: var(--salbot-text-color);
+
+    font-family: "salbot";
+    font-size: 20px;
+
+    h1 {
+        color: var(--salbot-title-color);
+    }
+    h3 {
+        color: var(--salbot-title-color);
+        padding-bottom: 10px;
+    }
+    a {
+        color: var(--salbot-link-color);
+        transition: .125s;
+    }
+    a:hover {
+        color: var(--salbot-text-color);
+    }
+}
+
+.title-padding {
+    padding-top: 20px;
+}
+
+.bottom-padding {
+    padding-bottom: 20px;
+}

@@ -1,0 +1,40 @@
+nav {
+    background-color: var(--salbot-dark);
+
+    #consumer-selection {
+        background-color: var(--salbot-bg-color);
+
+        width: 100%;
+        max-width: 650px;
+
+        // Border and background
+        padding: 5px 10px;
+        border: 2px solid black;
+        border-radius: 5px;
+        
+        .consumer-name {
+            min-width: 600px;
+        }
+        h3 {
+            color: var(--salbot-faded-title-color);
+            transition: .125s;
+
+            margin: 0;
+            padding: 0;
+        }
+        .no-fade h3 {
+            color: var(--salbot-title-color);
+        }
+        h6 {
+            max-width: 400px;
+        }
+        a {
+            text-decoration: none;
+
+            padding: 5px 10px;
+        }
+        a:hover h3 {
+            color: var(--salbot-title-color);
+        }
+    }
+}

@@ -1,20 +1,22 @@
 <!DOCTYPE html>
-<html>
+<html data-bs-theme="dark">
   <head>
-    <title>I like coc</title>
+    <% if controller_name != "salbot" %>
+      <title>I love coc</title>
+    <% else %>
+      <title>Salbot - Benachrichtigungen für Noten</title>
+    <% end %>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= favicon_link_tag "favicon.png" %>
+    <%= favicon_link_tag controller_name == "salbot" ? "salbot_favicon.png" : "favicon.png" %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
   <body>
-    <%= render partial: "layouts/time-zone" %>
-
     <%= yield %>
   </body>
 </html>

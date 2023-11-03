@@ -1,0 +1,77 @@
+<%= render partial: "new_consumer_toast" %>
+<%= render partial: "error_toast" %>
+
+<turbo-frame id="navbar" src="<%= navbar_path(no_back_btn: 1, controller_name: controller_name, action_name: action_name) %>" data-controller="navbar"></turbo-frame>
+
+<div class="container">
+    <div class="d-flex justify-content-center w-100">
+        <% if is_admin? %>
+            <div style="width: 100%; max-width: 800px">
+                <div class="d-flex justify-content-center gap-3 mt-3">
+                    <div style="width: 80%">
+                        <%= form_with model: @consumer, class: "form" do |form| %>
+                            <div class="d-flex gap-3">
+                                <%= form.text_field :nickname, class: "form-control", data: {
+                                    controller: "tippy",
+                                    tippy_content: "Change clients' nickname"
+                                } %>
+                                <%= form.submit value: "Save", class: "btn btn-success", style: "width: 100px" %>
+                            </div>
+                        <% end %>
+                    </div>
+                    <%= link_to "Lock", consumer_lock_path, class: "btn btn-secondary", style: "width: 100px", data: {
+                        turbo_method: :post
+                    } %>
+                    <%= link_to "Delete", consumer_delete_path, class: "btn btn-danger", style: "width: 100px", data: {
+                        turbo_method: :delete
+                    } %>
+                </div>
+            </div>
+        <% end %>
+    </div>
+
+    <div id="plugins" class="my-4 text-center">
+        <div class="collapser d-flex justify-content-center align-items-center gap-4 mb-2" data-bs-toggle="collapse" data-bs-target="#plugins-collapse">
+            <h1 class="mb-0 pb-0" data-controller="tippy" data-tippy-content="Automatic actions that can be enabled/disabled">Plugins</h1>
+            <%= image_tag "dropdown", height: "30px" %>
+        </div>
+
+        <div id="plugins-collapse" class="collapse show">
+            <div class="explorer-container">
+                <% @plugin_folders.each do |plugin_folder| %>
+                    <%= link_to folder_path(folder_id: plugin_folder.id), class: "explorer-item d-flex align-items-center gap-4" do %>
+                        <%= image_tag "folder.png", height: "40px" %>
+                        <h3 class="mb-0 pb-0"><%= plugin_folder.name %></h3>
+                    <% end %>
+                <% end %>
+
+                <% @plugins.each do |plugin| %>
+                    <%= render partial: "plugin", locals: { action: plugin, consumer: @consumer } %>
+                <% end %>
+            </div>
+    </div>
+
+    <hr>
+
+    <div id="dispatched" class="my-4 text-center">
+        <div class="collapser d-flex justify-content-center align-items-center gap-4 mb-2" data-bs-toggle="collapse" data-bs-target="#dispatched-collapse">
+            <h1 class="mb-0 pb-0" data-controller="tippy" data-tippy-content="Actions dispatched to the client from here">Dispatched Actions</h1>
+            <%= image_tag "dropdown", height: "30px" %>
+        </div>
+
+        <div id="dispatched-collapse" class="collapse show">
+            <div class="explorer-container">
+                <% @dispatched_folders.each do |dispatched_folder| %>
+                    <%= link_to folder_path(folder_id: dispatched_folder.id), class: "explorer-item d-flex align-items-center gap-4" do %>
+                        <%= image_tag "folder.png", height: "40px" %>
+                        <h3 class="mb-0 pb-0"><%= dispatched_folder.name %></h3>
+                    <% end %>
+                <% end %>
+
+                <% @dispatched.each do |dispatched| %>
+                    <%= render partial: "dispatched", locals: { action: dispatched, consumer: @consumer } %>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</div>

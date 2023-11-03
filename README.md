@@ -1,24 +1,21 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+(Color palette)[https://coolors.co/palette/edede9-d6ccc2-f5ebe0-e3d5ca-d5bdaf]
 
-Things you may want to cover:
+# Links
 
-* Ruby version
+[Nested Rails forms](https://stackoverflow.com/a/71715794/15174310)
+[Turbo reloading forms](https://stackoverflow.com/a/71762032/15174310)
 
-* System dependencies
+# TODO
 
-* Configuration
+- Reload all consumer periodically DONE
+- New id if it didn't exist DONE
 
-* Database creation
+# Road
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- Consumers don't need to possess actions anymore DONE
+- Create action dispatcher DONE
+- Create default actions
+- Action creator (plugins and dispatched)
+- Action editor

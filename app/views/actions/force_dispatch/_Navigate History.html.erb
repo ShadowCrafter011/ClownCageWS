@@ -1,0 +1,8 @@
+<%= render "actions/force_dispatch/base" do |form| %>
+    <%= render partial: "actions/force_dispatch/visibility", locals: {form: form} %>
+
+    <div>
+        <%= form.label :force_direction, "Where to navigate to" %>
+        <%= form.select :force_direction, [["Back", "back"], ["Forward", "forward"]], {}, {class: "form-select"} %>
+    </div>
+<% end %>

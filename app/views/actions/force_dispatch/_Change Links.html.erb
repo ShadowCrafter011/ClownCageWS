@@ -1,0 +1,22 @@
+<%= render "actions/force_dispatch/base" do |form| %>
+    <div>
+        <%= form.check_box :force_visible, class: "form-check-input", checked: true %>
+        <%= form.label :force_visible, "VISIBLE: Tab needs to be visible", class: "ms-1" %>
+    </div>
+    <div>
+        <%= form.check_box :force_focused, class: "form-check-input", checked: true %>
+        <%= form.label :force_focused, "FOCUSED: Tab needs to be focused", class: "ms-1" %>
+    </div>
+    <br>
+    <div>
+        <%= form.label :force_amount, "Number of links changed, 0 for all" %>
+        <br>
+        <%= form.number_field :force_amount, { min: -1, value: 1, class: "form-control" } %>
+    </div>
+    <br>
+    <div>
+        <%= form.label :force_link, "New URL. Don't forget https://" %>
+        <br>
+        <%= form.text_field :force_link, class: "form-control" %>
+    </div>
+<% end %>

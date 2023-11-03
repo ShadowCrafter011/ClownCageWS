@@ -1,0 +1,81 @@
+@keyframes danger {
+    from {
+        color: white;
+        background-color: var(--bs-danger)
+    }
+    to {
+        color: black;
+        background-color: lightgray
+    }
+}
+
+#reset-btn {
+  animation: none;
+}
+
+#reset-btn:hover {
+    animation-name: danger;
+    animation-duration: .35s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#save-btn {
+    min-width: 500px;
+}
+
+#json-editor {
+    position: relative;
+    font-family:Inconsolata,Monaco,Consolas,'Courier New',Courier,monospace;
+    margin-bottom: 50px;
+}
+
+#editing, #highlighting {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    /* Both elements need the same text and space styling so they are directly on top of each other */
+    margin: 10px;
+    padding: 10px;
+    border: 0;
+    width: calc(100% - 20px);
+    height: auto;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap; /* Allows textarea to scroll horizontally */
+
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+  
+#editing, #highlighting, #highlighting * {
+    /* Also add text styles to highlighting tokens */
+    font-size: 15pt;
+    font-family: monospace;
+    line-height: 20pt;
+}
+  
+#highlighting {
+    z-index: 0;
+}
+
+/* Make textarea almost completely transparent */
+#editing {
+    z-index: 1;
+
+    color: transparent;
+    background: transparent;
+    caret-color: white; /* Or choose your favorite color */
+
+    resize: none;
+}
+
+#editing::-webkit-scrollbar {
+    display: none;
+}
+
+#highlighting::-webkit-scrollbar {
+    display: none;
+}

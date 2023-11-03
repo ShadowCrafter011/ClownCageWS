@@ -7,6 +7,12 @@ gem "bootstrap"
 
 gem "dotenv-rails"
 
+gem "json"
+
+gem "jquery-rails"
+
+gem "jquery-dirtyforms-rails"
+
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.4"
 

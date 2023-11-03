@@ -1,0 +1,37 @@
+<turbo-frame id="navbar">
+    <% if Consumer.count > 0 %>
+        <nav class="navbar">
+            <div class="container-fluid position-relative">
+                <% unless params[:no_back_btn].present? %>
+                    <div class="position-absolute">
+                        <%= link_to "Back", consumer_path, class: "btn btn-success btn-lg ms-3", target: "_top", data: { controller: "link", action: "link#click" } %>
+                    </div>
+                <% end %>
+
+                <div class="d-flex justify-content-center w-100">
+                    <div id="consumer-selection" class="dropdown">
+                        <div class="d-block text-truncate" <%= "type=\"button\" role=\"button\" data-bs-toggle=\"dropdown\"".html_safe if @consumers.length > 0 %> aria-expanded="false">
+                            <div class="d-flex align-items-center justify-content-between no-fade">
+                                <%= render partial: "consumer", locals: { consumer: @consumer } %>
+
+                                <%= image_tag "dropdown_icon", height: "20px" if @consumers.length > 0 %>
+                            </div>
+                        </div>
+
+                        <% if @consumers.length > 0 %>
+                            <ul class="dropdown-menu w-100">
+                                <% @consumers.each do |con| %>
+                                    <li class="consumer-link">
+                                        <%= link_to url_for(@url_params.merge(uuid: con.uuid)), class: "d-block" do %>
+                                            <%= render partial: "consumer", locals: { consumer: con } %>
+                                        <% end %>
+                                    </li>
+                                <% end %>
+                            </ul>
+                        <% end %>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    <% end %>
+<turbo-frame>

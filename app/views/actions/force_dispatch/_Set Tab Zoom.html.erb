@@ -1,0 +1,8 @@
+<%= render "actions/force_dispatch/base" do |form| %>
+    <%= render partial: "actions/force_dispatch/visibility", locals: {form: form} %>
+
+    <div>
+        <%= form.label :force_zoom_level, "Zoom level" %>
+        <%= form.number_field :force_zoom_level, {value: 100, min: 10, max: 900, class: "form-control"} %>
+    </div>
+<% end %>

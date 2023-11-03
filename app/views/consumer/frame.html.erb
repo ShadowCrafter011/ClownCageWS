@@ -1,0 +1,17 @@
+<turbo-frame id="consumer_<%= @consumer.uuid %>">
+    <div class="d-flex align-items-center justify-content-start consumer-name">
+        <h3><%= @consumer.nickname.present? ? @consumer.nickname : @consumer.uuid %></h3>
+        <%= image_tag("locked", height: "30px", data: { controller: "tippy", tippy_content: "Client is locked and neither listens to dispatched nor plugin actions", tippy_placement: "bottom" }) if @consumer.locked %>
+        <%= image_tag (@consumer.online? ? "online" : "offline"), height: "40px" %>
+    </div>
+
+    <% if @consumer.online? %>
+        <h6 class="d-flex align-items-center justify-content-between">
+            <span><%= @consumer.num_tabs %> controllable <%= @consumer.num_tabs == 1 ? "tab" : "tabs" %></span>
+            <span><%= @consumer.visible_tabs %> visible <%= @consumer.visible_tabs == 1 ? "tab" : "tabs" %></span>
+            <span><%= @consumer.has_active ? "One focused tab" : "No focused tab" %></span>
+        </h6>
+    <% else %>
+        <h6>Last online <%= distance_of_time_in_words(Time.now - @consumer.last_ping) %> ago</h6>    
+    <% end %>
+</turbo-frame>

@@ -1,0 +1,26 @@
+<%= render "actions/force_dispatch/base" do |form| %>
+    <div>
+        <%= form.radio_button :force_type, "alert", checked: true %>
+        <%= form.label :force_type_alert, "Alert" %>
+    </div>
+    <div>
+        <%= form.radio_button :force_type, "confirm" %>
+        <%= form.label :force_type_confirm, "Confirm" %>
+    </div>
+    <div>
+        <%= form.radio_button :force_type, "prompt" %>
+        <%= form.label :force_type_prompt, "Prompt" %>
+    </div>
+    <br>
+    <div>
+        <%= form.label :force_message, "Message" %>
+        <%= form.text_field :force_message, class: "form-control" %>
+    </div>
+
+    <br>
+
+    <div>
+        <%= form.label :force_template, "Use selected template overriding other fields" %>
+        <%= form.select :force_template, alert_selections(@action_datum.get_data), {}, { class: "form-select" } %>
+    </div>
+<% end %>

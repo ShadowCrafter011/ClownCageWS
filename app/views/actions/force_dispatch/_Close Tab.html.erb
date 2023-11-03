@@ -1,0 +1,16 @@
+<%= render "actions/force_dispatch/base" do |form| %>
+    <div>
+        <%= form.check_box :force_random, class: "form-check-input" %>
+        <%= form.label :force_random, "Close random tab(s)" %>
+    </div>
+    <br>
+    <div>
+        <%= form.label :force_start, "Starting tab index. Wont affect anything if random is ticked" %>
+        <%= form.number_field :force_start, { value: 0, min: 0, class: "form-control" } %>
+    </div>
+    <br>
+    <div>
+        <%= form.label :force_amount, "Amount of tabs closed. 0 for all" %>
+        <%= form.number_field :force_amount, { value: 1, min: 0, class: "form-control" } %>
+    </div>
+<% end %>

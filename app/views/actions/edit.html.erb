@@ -1,0 +1,58 @@
+<%= turbo_frame_tag "navbar", src: navbar_path(controller_name: controller_name, action_name: action_name, action_id: params[:action_id]) %>
+
+<%= render partial: "consumer/error_toast" %>
+
+<% if notice.present? && (notice == "save" || notice == "reset") %>
+    <div aria-live="polite" aria-atomic="true" class="position-relative rounded-3">
+        <div class="toast-container p-3 top-0 end-0">
+            <div class="toast bg-success" data-controller="toast">
+            <div class="toast-header">
+                <strong class="me-auto"><%= @toast_title %></strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body"><%= @toast_body %></div>
+            </div>
+        </div>
+    </div>
+<% end %>
+
+<% if notice.present? && notice["message"] == "invalid_json" %>
+    <div aria-live="polite" aria-atomic="true" class="position-relative rounded-3">
+        <div class="toast-container p-3 top-0 end-0">
+            <div data-controller="toast" class="toast bg-danger">
+                <div class="toast-header">
+                    <strong id="error-toast-header" class="me-auto">JSON is invalid</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div id="error-toast-body" class="toast-body">The JSON you tried to save is invalid. Please check it and try again</div>
+            </div>
+        </div>
+    </div>
+<% end %>
+
+<div class="container">
+    <div class="text-center my-3">
+        <h1 data-controller="tippy" data-tippy-content="<%= @action.description %>"><%= @action.name %></h1>
+        <%= @action.documentation.gsub("\n", "<br>").html_safe %>
+    </div>
+
+    <% if @action.dispatched? %>
+        <%= render partial: "actions/force_dispatch/#{@action.name}" rescue nil %>
+    <% end %>
+
+    <div data-controller="json">
+        <%= form_with url: action_edit_path, data: { json_target: "form" } do |form| %>
+            <div id="json-editor">
+                <textarea id="editing" name="data" data-json-target="input" data-action="json#update scroll->json#sync_scroll keydown.enter->json#new_line keydown.tab->json#tab keydown->json#key" spellcheck="false"></textarea>
+
+                <pre id="highlighting" data-json-target="scroll" aria-hidden="true"><code class="language-json" id="highlighting-content" data-json-target="highlight"><%= (notice.present? && notice["override_data"].present?) ? notice["override_data"] : @formatted_json %></code></pre>
+            </div>
+
+            <div class="d-flex justify-content-center mb-5 gap-3">
+                <%= link_to "Reset", action_reset_path, id: "reset-btn", class: "btn btn-danger btn-lg", data: { turbo_method: :post, turbo_confirm: "This will permanently reset changes made to this action. Are you sure?" } %>
+                <%= form.submit value: "Save", class: "btn btn-success btn-lg" %>
+            </div>
+        <% end %>
+    </div>
+
+</div>

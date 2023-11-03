@@ -1,38 +1,42 @@
 Rails.application.routes.draw do
-  root "home#index"
+  root "salbot#index"
+  get "agb", to: "salbot#agb", as: "salbot_agb"
+  get "down", to: "home#download"
 
-  post "/", to: "home#login"
-  get "logout", to: "home#logout", as: "logout"
+  scope :admin do
+    get "/", to: "home#index", as: "admin"
+    post "/", to: "home#login"
+    get "logout", to: "home#logout", as: "logout"
+    get "idlist", to: "home#idlist", as: "idlist"
 
-  get "commands", to: "commands#index", as: "commands"
+    get "action_status/:callback_uuid", to: "actions#action_status"
 
-  get "urls", to: "visit#index"
+    get "consumers", to: "consumer#index", as: "consumers"
+    scope "consumer/:uuid" do
+      get "/", to: "consumer#show", as: "consumer"
+      patch "/", to: "consumer#update"
+      post "lock", to: "consumer#lock", as: "consumer_lock"
+      delete "delete", to: "consumer#delete", as: "consumer_delete"
 
-  get "time_zone", to: "home#time_zone"
+      get "navbar", to: "consumer#navbar", as: "navbar"
 
-  scope :frames do
-    get "rickroll", to: "commands#rickroll_frame"
-    post "rickroll", to: "commands#rickroll"
+      scope "folder/:folder_id" do
+        get "/", to: "consumer#folder", as: "folder"
+      end
 
-    get "redirect", to: "commands#redirect_frame"
-    post "redirect", to: "commands#redirect"
+      scope "action/:action_id" do
+        get "/", to: "actions#frame", as: "action_frame"
+        post "dispatch", to: "actions#dispatch_action", as: "action_dispatch"
+        post "force_dispatch", to: "actions#force_dispatch", as: "action_force_dispatch"
+        post "toggle", to: "actions#toggle", as: "toggle_action"
+        get "edit", to: "actions#edit", as: "action_edit"
+        post "edit", to: "actions#update"
+        post "reset", to: "actions#reset", as: "action_reset"
+      end
+    end
 
-    get "redirect_all", to: "commands#redirect_all_frame"
-    post "redirect_all", to: "commands#redirect_all"
-
-    get "change_urls", to: "commands#change_urls_frame"
-    post "change_urls", to: "commands#change_urls"
-
-    get "change_all_urls", to: "commands#change_all_urls_frame"
-    post "change_all_urls", to: "commands#change_all_urls"
-
-    get "change_images", to: "commands#change_images_frame"
-    post "change_images", to: "commands#change_images"
-
-    get "change_all_images", to: "commands#change_all_images_frame"
-    post "change_all_images", to: "commands#change_all_images"
-
-    get "prompt", to: "commands#prompt_frame"
-    post "prompt", to: "commands#prompt"
+    scope :frame do
+      get "consumer/:uuid", to: "consumer#frame", as: "consumer_frame"
+    end
   end
 end
