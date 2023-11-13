@@ -1,5 +1,8 @@
 require "rake"
 
+Rake::Task.clear
+Rails.application.load_tasks
+
 class HomeController < ApplicationController
   def index
     redirect_to consumers_path if logged_in?
