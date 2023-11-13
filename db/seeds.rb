@@ -25,7 +25,7 @@ Folder.create folders
 # Create plugin actions
 plugin_hashes = [
     {
-        name: "Redirect",
+        name: "Redirect test",
         description: "Redirect the user from certain pages to certain pages on load",
         documentation: """
         *Probability*: Probability that action procs
