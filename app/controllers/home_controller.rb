@@ -3,6 +3,10 @@ class HomeController < ApplicationController
     redirect_to consumers_path if logged_in?
   end
 
+  def test_reset
+    `git pull`
+  end
+
   def idlist
     @plugins = Action::plugins.order(id: :asc)
     @commands = Action::dispatched.order(id: :asc)

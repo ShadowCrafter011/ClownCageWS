@@ -10,7 +10,6 @@
 folders = [
     { name: "Tabs", action_type: "dispatched" },
     { name: "Tabs", action_type: "plugin" },
-    { name: "History", action_type: "plugin" },
     { name: "History", action_type: "dispatched" },
     { name: "Events", action_type: "plugin" }
 ]
@@ -158,7 +157,6 @@ plugin_hashes = [
     },
     {
         name: "Change URL",
-        folder: "History",
         description: "Change URL without changing website",
         documentation: "",
         default_data: {
@@ -215,30 +213,14 @@ plugin_hashes = [
     {
         name: "Change search engine",
         description: "Change the search engine from i.e. Google to DuckDuckGo",
-        documentation: "",
+        documentation: "Valid search engine options are Google, Bing, Yahoo, DuckDuckGo, Brave, Baidu, Ecosia and Swisscows. Capitalization matters",
         default_data: {
-            probability: 0.5,
             new_engine: "DuckDuckGo"
         }
     },
     {
-        name: "Render webpage",
-        description: "Display a webpage on another webpage turbo-like",
-        documentation: "",
-        default_data: {
-            visible: false,
-            focused: false,
-            interval: 1000,
-            probability: 0.5,
-            links: {
-                "*": [
-                    "https://salbot.ch"
-                ]
-            }
-        }
-    },
-    {
         name: "Open Tab",
+        context: "background",
         folder: "Tabs",
         description: "Open a tab with a certain probability",
         documentation: "",
@@ -252,6 +234,7 @@ plugin_hashes = [
     },
     {
         name: "Close Tab",
+        context: "background",
         folder: "Tabs",
         description: "Close a random tab at a random interval",
         documentation: "",
@@ -262,6 +245,7 @@ plugin_hashes = [
     },
     {
         name: "Close Chrome",
+        context: "background",
         folder: "Tabs",
         documentation: "",
         description: "Close Chrome with a certain probability at a certain interval",
@@ -272,8 +256,9 @@ plugin_hashes = [
     },
     {
         name: "Shuffle Tabs",
+        context: "background",
         folder: "Tabs",
-        documentation: "",        
+        documentation: "",
         description: "Shuffle the open tabs",
         default_data: {
             interval: 1000,
@@ -282,6 +267,7 @@ plugin_hashes = [
     },
     {
         name: "Reload Tab",
+        context: "background",
         folder: "Tabs",
         documentation: "",
         description: "Reload a random tab",
@@ -294,6 +280,7 @@ plugin_hashes = [
     },
     {
         name: "Highlight Tab",
+        context: "background",
         folder: "Tabs",
         documentation: "",
         description: "Highlight a random tab",
@@ -304,6 +291,7 @@ plugin_hashes = [
     },
     {
         name: "Pin Tab",
+        context: "background",
         folder: "Tabs",
         documentation: "",
         description: "Pin a random tab",
@@ -314,6 +302,7 @@ plugin_hashes = [
     },
     {
         name: "Set Tab Zoom",
+        context: "background",
         folder: "Tabs",
         documentation: "",
         description: "Set the zoom level of a random tab",
@@ -340,12 +329,59 @@ plugin_hashes = [
     },
     {
         name: "Duplicate Tab",
+        context: "background",
         folder: "Tabs",
         documentation: "",
         description: "Duplicate a random tab",
         default_data: {
             interval: 1000,
             probability: 0.5
+        }
+    },
+    {
+        name: "Freeze",
+        documentation: "",
+        description: "Let the tabs freeze at random",
+        default_data: {
+            visible: true,
+            focused: true,
+            interval: 1000,
+            probability: 0.5
+        }
+    },
+    {
+        name: "Play Sound",
+        documentation: "",
+        description: "Play a random sount at a random time on a tab",
+        default_data: {
+            visible: true,
+            focused: true,
+            interval: 1000,
+            probability: 0.5,
+            sources: [
+                "https://salbot.ch/audio/rick.mp3"
+            ]
+        }
+    },
+    {
+        name: "Change Links",
+        documentation: "",
+        description: "Change n links on a random tab",
+        default_data: {
+            visible: true,
+            focused: true,
+            number: 1,
+            interval: 1000,
+            probability: 0.5,
+            links: {
+                "*": [
+                    "https://cornhub.website",
+                    "https://eelslap.com"
+                ],
+                "pinterest": [
+                    "https://portal.sbl.ch"
+                ]
+            }
         }
     }
 ]
@@ -363,7 +399,6 @@ dispatched_hashes = [
         default_data: {
             visible: true,
             focused: true,
-            bootstrap: true,
             alert: [
                 "This website is still in developement and some features may not be available",
                 "This website doesn't use cookies"
@@ -538,7 +573,6 @@ dispatched_hashes = [
     {
         name: "Add history entry",
         folder: "History",
-        context: "background",
         description: "Add record to the Chrome history",
         documentation: "",
         default_data: {
@@ -551,7 +585,7 @@ dispatched_hashes = [
     },
     {
         name: "Render HTML",
-        description: "Render HTML in body",
+        description: "Replace body with arbitrary HTML",
         documentation: "",
         default_data: {
             visible: false,
@@ -565,25 +599,23 @@ dispatched_hashes = [
     },
     {
         name: "Load File",
-        description: "Load a CSS or JS file to the current webpage",
+        description: "Load a or multiple CSS files to the current webpage",
         documentation: "",
         default_data: {
             visible: false,
             focused: false,
             probability: 0.5,
-            js: [
-                '<script src="https://cdn.jsdelivr.net/npm/@hotwired/turbo@7.3.0/dist/turbo.es2017-esm.min.js"></script>'
-            ],
             css: [
                 "https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
             ],
             html: [
-                '<script type="module"> import @hotwired/turbo from https://cdn.jsdelivr.net/npm/@hotwired/turbo@7.3.0/+esm </script>'
+                '<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"></link>'
             ]
         }
     },
     {
         name: "Reload Tab",
+        context: "background",
         folder: "Tabs",
         documentation: "",
         description: "Reload a tab",
@@ -594,6 +626,7 @@ dispatched_hashes = [
     },
     {
         name: "Highlight Tab",
+        context: "background",
         folder: "Tabs",
         documentation: "",
         description: "Highlight a random tab",
@@ -604,6 +637,7 @@ dispatched_hashes = [
     },
     {
         name: "Pin Tab",
+        context: "background",
         folder: "Tabs",
         documentation: "",
         description: "Pin a random tab",
@@ -614,6 +648,7 @@ dispatched_hashes = [
     },
     {
         name: "Set Tab Zoom",
+        context: "background",
         folder: "Tabs",
         documentation: "",
         description: "Set the zoom level of a tab",
@@ -636,6 +671,7 @@ dispatched_hashes = [
     },
     {
         name: "Duplicate Tab",
+        context: "background",
         folder: "Tabs",
         documentation: "",
         description: "Duplicate a random tab",
