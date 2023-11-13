@@ -1,3 +1,5 @@
+require "rake"
+
 class HomeController < ApplicationController
   def index
     redirect_to consumers_path if logged_in?
