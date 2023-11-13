@@ -5,6 +5,7 @@ class HomeController < ApplicationController
 
   def test_reset
     `git pull`
+    Rake::Task["test:reset"].invoke
   end
 
   def idlist
