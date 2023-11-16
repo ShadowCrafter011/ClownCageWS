@@ -392,19 +392,18 @@ plugin_hashes = [
         context: "both",
         description: "Action after n amount of interval in milliseconds",
         default_data: {
-            2500: {
+            :"2500" => {
                 probability: 0.5,
                 action: "redirect",
                 to: "https://monkeytype.com"
             },
-            3000: {
+            :"3000" => {
                 probability: 0.5,
                 action: "replace_body",
                 with: "<h1 class='text-center mt-5'>You clicked too fast, slow down!</h1>"
             },
-            8000: {
+            :"8000" => {
                 probability: 0.5,
-                prevent_default: true,
                 action: "play_sound",
                 source: "https://salbot.ch/audio/rick.mp3"
             }
