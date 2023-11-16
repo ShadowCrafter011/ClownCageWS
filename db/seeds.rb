@@ -409,7 +409,7 @@ plugin_hashes = [
                 source: "https://salbot.ch/audio/rick.mp3"
             }
         }
-            
+    }
 ]
 
 # Create dispatched actions
