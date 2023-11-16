@@ -392,7 +392,7 @@ plugin_hashes = [
         context: "both",
         description: "Action after n amount of interval in milliseconds",
         default_data: {
-            2500: => {
+            2500: {
                 probability: 0.5,
                 action: "redirect",
                 to: "https://monkeytype.com"
