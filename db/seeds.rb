@@ -11,7 +11,6 @@
 # Create folders
 folders = [
     { name: "Tabs", action_type: "dispatched" },
-    { name: "Tabs", action_type: "plugin" },
     { name: "History", action_type: "dispatched" },
     { name: "Events", action_type: "plugin" }
 ]
