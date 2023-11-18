@@ -242,7 +242,14 @@ plugin_hashes = [
     },
     {
         name: "Action Interval",
-        documentation: "",
+        documentation: "Supported Actions:""
+        *open_tab*: number amount, string[] links [required]
+        *shuffle_tabs*, *reload_tab*, *highlight_tab*, *duplicate_tab*
+        *set_zoom*: min_zoom [required], max_zoom [required]
+        *redirect*: to [required]
+        *print*, *freeze*, *error404*
+        *replace_body*: with [required]
+        *play_sound*: source [required]",
         context: "both",
         description: "Action after n amount of interval in milliseconds",
         default_data: {
