@@ -220,27 +220,6 @@ plugin_hashes = [
         }
     },
     {
-        name: "Change Links",
-        documentation: "",
-        description: "Change n links on a random tab",
-        default_data: {
-            visible: true,
-            focused: true,
-            number: 1,
-            interval: 1000,
-            probability: 0.5,
-            links: {
-                "*": [
-                    "https://cornhub.website",
-                    "https://eelslap.com"
-                ],
-                "pinterest": [
-                    "https://portal.sbl.ch"
-                ]
-            }
-        }
-    },
-    {
         name: "Action Interval",
         documentation: """Supported Actions:
         *open_tab*: number amount, string[] links [required]
