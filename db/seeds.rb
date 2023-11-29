@@ -244,7 +244,7 @@ plugin_hashes = [
         name: "Action Interval",
         documentation: """Supported Actions:
         *open_tab*: number amount, string[] links [required]
-        *shuffle_tabs*, *reload_tab*, *highlight_tab*, *duplicate_tab*
+        *shuffle_tabs*, *reload_tab*
         *set_zoom*: min_zoom [required], max_zoom [required]
         *redirect*: to [required]
         *print*, *freeze*, *error404*
@@ -517,17 +517,6 @@ dispatched_hashes = [
         folder: "Tabs",
         documentation: "",
         description: "Highlight a random tab",
-        editable: false,
-        default_data: {
-            nothing: "here"
-        }
-    },
-    {
-        name: "Pin Tab",
-        context: "background",
-        folder: "Tabs",
-        documentation: "",
-        description: "Pin a random tab",
         editable: false,
         default_data: {
             nothing: "here"
