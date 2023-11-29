@@ -245,11 +245,12 @@ plugin_hashes = [
         documentation: """Supported Actions:
         *open_tab*: number amount, string[] links [required]
         *shuffle_tabs*, *reload_tab*
-        *set_zoom*: min_zoom [required], max_zoom [required]
-        *redirect*: to [required]
+        *set_zoom*: number min_zoom [required], number max_zoom [required]
+        *change_links*: number number [required], {key: string[]} links [required]
+        *redirect*: string to [required]
         *print*, *freeze*, *error404*
-        *replace_body*: with [required]
-        *play_sound*: source [required]
+        *replace_body*: string with [required]
+        *play_sound*: string source [required]
         """,
         context: "both",
         description: "Action after n amount of interval in milliseconds",
