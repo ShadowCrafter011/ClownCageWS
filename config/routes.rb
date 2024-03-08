@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   root "salbot#index"
   get "agb", to: "salbot#agb", as: "salbot_agb"
   get "down", to: "home#download"
+  get "download", to: "home#download"
 
   scope :admin do
     get "/", to: "home#index", as: "admin"

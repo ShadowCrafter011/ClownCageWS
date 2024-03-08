@@ -41,7 +41,7 @@ class HomeController < ApplicationController
   end
 
   def download
-    redirect_to "https://github.com/ShadowCrafter011/ClownCage/archive/refs/heads/clowncagev2.zip", allow_other_host: true
+    redirect_to "https://github.com/ShadowCrafter011/ClownCage/releases/download/2.0.0/ClownCage.zip", allow_other_host: true
   end
 
   private
