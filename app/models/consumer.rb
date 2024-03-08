@@ -49,7 +49,7 @@ class Consumer < ApplicationRecord
     end
 
     def online?
-        self.last_ping + 4.seconds > Time.now
+        self.last_ping + 2.seconds > Time.now
     end
 
     def self.ping change_uuid_channel, data

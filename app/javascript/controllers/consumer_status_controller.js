@@ -34,6 +34,6 @@ export default class extends Controller {
     var self = this;
     this.stimulus.next_reload = setTimeout(function() {
       self.stimulus.element.reload();
-    }, 5000);
+    }, 2000);
   }
 }
