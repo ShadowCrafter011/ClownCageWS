@@ -13,8 +13,7 @@ export default class extends Controller {
     // Always reload frames every 10 seconds
     var self = this;
     this.reload_interval = setInterval(function() {
-      // TODO: Uncomment this, removed to unclog rails logs
-      // self.element.reload();
+      self.element.reload();
     }, 10_000);
   }
 

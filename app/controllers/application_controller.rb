@@ -1,12 +1,10 @@
 class ApplicationController < ActionController::Base    
     def require_admin!
-        # TODO: Remove "public" for final release
-        redirect_to admin_path unless session_token_status == "admin" || session_token_status == "public"
+        redirect_to admin_path unless session_token_status == "admin"
     end
 
     def is_admin?
-        # TODO: Remove "public" for final release
-        session_token_status == "admin" || session_token_status == "public"
+        session_token_status == "admin"
     end
     helper_method :is_admin?
 
