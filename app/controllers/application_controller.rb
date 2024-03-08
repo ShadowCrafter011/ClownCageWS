@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base    
     def require_admin!
-        redirect_to admin_path unless session_token_status == "admin"
+        redirect_to root_path unless session_token_status == "admin"
     end
 
     def is_admin?
@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
     helper_method :is_admin?
 
     def require_login!
-        redirect_to admin_path unless logged_in?
+        redirect_to root_path unless logged_in?
     end
 
     def logged_in?

@@ -28,16 +28,16 @@ class HomeController < ApplicationController
 
     else
       session[:error] = 1
-      return redirect_to admin_path
+      return redirect_to root_path
     end
 
     return redirect_to consumers_path if logged_in?
-    redirect_to admin_path
+    redirect_to root_path
   end
 
   def logout
     cookies.delete :_session_token
-    redirect_to admin_path
+    redirect_to root_path
   end
 
   def download
